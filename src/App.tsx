@@ -708,11 +708,27 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <EventCard 
                 status="Upcoming"
+                code="OP-MATLAB"
+                title="MATLAB Workshop"
+                date="JUNE 20, 2024"
+                image="/event/matlab.jpeg"
+                index={0}
+              />
+              <EventCard 
+                status="Upcoming"
+                code="OP-PROMPTX"
+                title="PromptX Seminar"
+                date="JUNE 25, 2024"
+                image="/event/promptx.jpeg"
+                index={1}
+              />
+              <EventCard 
+                status="Upcoming"
                 code="OP-SYTRON1"
                 title="Sytron"
                 date="JULY 15, 2024"
                 image="/event/sytron.jpeg"
-                index={0}
+                index={2}
               />
               <EventCard 
                 status="Upcoming"
@@ -720,7 +736,7 @@ export default function App() {
                 title="Sytron"
                 date="JULY 20, 2024"
                 image="/event/sytron (2).jpeg"
-                index={1}
+                index={3}
               />
               <EventCard 
                 status="Upcoming"
@@ -728,7 +744,7 @@ export default function App() {
                 title="Sytron"
                 date="JULY 25, 2024"
                 image="/event/sytron (3).jpeg"
-                index={2}
+                index={4}
               />
               <EventCard 
                 status="Upcoming"
@@ -736,7 +752,7 @@ export default function App() {
                 title="Sytron"
                 date="AUGUST 1, 2024"
                 image="/event/sytron (4).jpeg"
-                index={3}
+                index={5}
               />
               <EventCard 
                 status="Upcoming"
@@ -744,32 +760,6 @@ export default function App() {
                 title="Sytron"
                 date="AUGUST 5, 2024"
                 image="/event/sytron (5).jpeg"
-                index={4}
-              />
-            </div>
-          </div>
-
-          {/* Previous Events */}
-          <div>
-            <div className="mb-12">
-              <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-on-surface-variant">PREVIOUS OPERATIONS</h3>
-              <div className="w-12 h-[2px] bg-on-surface-variant/30 mt-4" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <EventCard 
-                status="Completed"
-                code="OP-MATLAB"
-                title="MATLAB Workshop"
-                date="JUNE 20, 2024"
-                image="/event/matlab.jpeg"
-                index={5}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-PROMPTX"
-                title="PromptX Seminar"
-                date="JUNE 25, 2024"
-                image="/event/promptx.jpeg"
                 index={6}
               />
             </div>

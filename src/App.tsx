@@ -175,15 +175,6 @@ const EventCard = ({ status, code, title, date, image, reportLink, index = 0 }: 
         <h4 className="font-headline text-lg font-black text-on-surface uppercase tracking-tight mb-3 group-hover:text-primary transition-colors duration-300">{title}</h4>
         <div className="flex justify-between items-center">
           <span className="text-[10px] font-label text-on-surface-variant/60 uppercase tracking-widest">{date}</span>
-          {status === 'Upcoming' ? (
-            <button className="flex items-center gap-1 text-[10px] font-label text-on-primary bg-primary px-4 py-1.5 uppercase tracking-widest font-bold hover:bg-white transition-colors group/btn">
-              Register <ArrowUpRight size={10} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-            </button>
-          ) : (
-            <a href={reportLink} className="flex items-center gap-1 text-[10px] font-label text-primary hover:text-white uppercase tracking-widest transition-colors">
-              View Report <ChevronRight size={12} />
-            </a>
-          )}
         </div>
       </div>
 

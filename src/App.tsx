@@ -25,7 +25,10 @@ import {
   Shield,
   Award,
   BookOpen,
-  FileText
+  FileText,
+  Linkedin,
+  Instagram,
+  Facebook
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Antenna3D } from "./components/Antenna3D";
@@ -290,6 +293,13 @@ const TeamMember = ({ name, role, image, badge, index = 0 }: any) => (
   </motion.div>
 );
 
+// EDIT YOUR SOCIAL MEDIA LINKS HERE:
+const SOCIAL_LINKS = {
+  linkedin: "https://linkedin.com/company/ieee-aps-iem",
+  instagram: "https://instagram.com/ieee_aps_iem",
+  facebook: "https://facebook.com/ieeeapsiem"
+};
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -341,8 +351,15 @@ export default function App() {
 
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex items-center gap-4 text-primary/60">
-              <Network size={18} className="cursor-pointer hover:text-primary transition-colors" />
-              <Terminal size={18} className="cursor-pointer hover:text-primary transition-colors" />
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                <Linkedin size={16} />
+              </a>
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                <Instagram size={16} />
+              </a>
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                <Facebook size={16} />
+              </a>
             </div>
             <a
               href="/how-to-join-aps.pdf"
@@ -402,6 +419,18 @@ export default function App() {
                   <a href="#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</a>
                   <a href="#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</a>
                   <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Contact</a>
+                </div>
+
+                <div className="flex justify-around items-center py-4 border-t border-outline-variant/10 mt-4">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                    <Linkedin size={18} />
+                  </a>
+                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                    <Instagram size={18} />
+                  </a>
+                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                    <Facebook size={18} />
+                  </a>
                 </div>
 
                 <div className="mt-auto pb-4">
@@ -884,6 +913,64 @@ export default function App() {
         </div>
       </section>
 
+      {/* Floating Social Media Tab / Side Panel */}
+      <motion.div 
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 2.2 }}
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-[200] hidden md:flex flex-col gap-1.5"
+      >
+        {[
+          { 
+            name: "LinkedIn", 
+            icon: Linkedin, 
+            url: SOCIAL_LINKS.linkedin, 
+            color: "from-[#0077B5] to-[#00a0dc]",
+            shadow: "rgba(0,119,181,0.4)" 
+          },
+          { 
+            name: "Instagram", 
+            icon: Instagram, 
+            url: SOCIAL_LINKS.instagram, 
+            color: "from-[#833AB4] via-[#FD1D1D] to-[#F56040]",
+            shadow: "rgba(253,29,29,0.4)" 
+          },
+          { 
+            name: "Facebook", 
+            icon: Facebook, 
+            url: SOCIAL_LINKS.facebook, 
+            color: "from-[#1877F2] to-[#3b5998]",
+            shadow: "rgba(24,119,242,0.4)" 
+          }
+        ].map((social, idx) => (
+          <motion.a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ x: 8 }}
+            className="flex items-center group relative"
+          >
+            {/* Tab Body */}
+            <div className={`flex items-center justify-center w-11 h-11 bg-surface-dim border border-l-0 border-primary/20 group-hover:border-primary/60 transition-all duration-300 relative overflow-hidden`}>
+              {/* Slide-in color gradient background */}
+              <div className={`absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0`} />
+              
+              {/* Corner Accents */}
+              <span className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-primary/30 group-hover:border-white transition-colors" />
+              <span className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-primary/30 group-hover:border-white transition-colors" />
+
+              <social.icon size={18} className="text-primary group-hover:text-white transition-all duration-300 z-10 relative drop-shadow-[0_0_4px_rgba(0,212,255,0.4)]" />
+            </div>
+
+            {/* Label Tooltip */}
+            <div className="absolute left-full ml-2 px-3 py-1 bg-surface-dim border border-primary/30 text-primary font-label text-[9px] uppercase tracking-[0.2em] whitespace-nowrap opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300 pointer-events-none shadow-[0_0_12px_rgba(0,212,255,0.2)]">
+              {social.name}
+            </div>
+          </motion.a>
+        ))}
+      </motion.div>
+
       {/* Floating PDF Button */}
       <motion.a
         href="/how-to-join-aps.pdf"
@@ -934,14 +1021,14 @@ export default function App() {
                 Advancing the frontiers of electromagnetics, antennas, and wave propagation through tactical innovation at IEM, Kolkata.
               </p>
               <div className="flex gap-6">
-                <a href="#" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-primary hover:border-primary/30 transition-all duration-300">
-                  <Globe size={18} />
+                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#0077B5] hover:border-[#0077B5]/40 hover:shadow-[0_0_15px_rgba(0,119,181,0.3)] transition-all duration-300">
+                  <Linkedin size={18} />
                 </a>
-                <a href="#" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-primary hover:border-primary/30 transition-all duration-300">
-                  <Network size={18} />
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#F56040] hover:border-[#F56040]/40 hover:shadow-[0_0_15px_rgba(245,96,64,0.3)] transition-all duration-300">
+                  <Instagram size={18} />
                 </a>
-                <a href="#" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-primary hover:border-primary/30 transition-all duration-300">
-                  <Share size={18} />
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:shadow-[0_0_15px_rgba(24,119,242,0.3)] transition-all duration-300">
+                  <Facebook size={18} />
                 </a>
               </div>
             </div>

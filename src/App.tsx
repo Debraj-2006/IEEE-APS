@@ -13,8 +13,6 @@ import {
   FlaskConical, 
   MapPin, 
   Mail, 
-  Globe, 
-  Share,
   Menu,
   X,
   Cpu,
@@ -39,20 +37,19 @@ const TerminalText = ({ text, delay = 0 }: { text: string; delay?: number }) => 
   const [displayText, setDisplayText] = useState("");
   
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let interval: NodeJS.Timeout;
     const startTimeout = setTimeout(() => {
       let i = 0;
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setDisplayText(text.slice(0, i));
         i++;
         if (i > text.length) clearInterval(interval);
       }, 50);
-      return () => clearInterval(interval);
     }, delay * 1000);
     
     return () => {
       clearTimeout(startTimeout);
-      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
     };
   }, [text, delay]);
 

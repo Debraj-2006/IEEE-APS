@@ -719,41 +719,41 @@ export default function App() {
             <EventCard 
               status="Upcoming"
               code="OP-SYTRON1"
-              title="Sytron 1"
+              title="Sytron"
               date="JULY 15, 2024"
-              image="/event/sytron1.jpeg"
+              image="/event/sytron.jpeg"
               index={2}
             />
             <EventCard 
               status="Upcoming"
               code="OP-SYTRON2"
-              title="Sytron 2"
+              title="Sytron"
               date="JULY 20, 2024"
-              image="/event/sytron2.jpeg"
+              image="/event/sytron (2).jpeg"
               index={3}
             />
             <EventCard 
               status="Upcoming"
               code="OP-SYTRON3"
-              title="Sytron 3"
+              title="Sytron"
               date="JULY 25, 2024"
-              image="/event/sytron3.jpeg"
+              image="/event/sytron (3).jpeg"
               index={4}
             />
             <EventCard 
               status="Upcoming"
               code="OP-SYTRON4"
-              title="Sytron 4"
+              title="Sytron"
               date="AUGUST 1, 2024"
-              image="/event/sytron4.jpeg"
+              image="/event/sytron (4).jpeg"
               index={5}
             />
             <EventCard 
               status="Upcoming"
               code="OP-SYTRON5"
-              title="Sytron 5"
+              title="Sytron"
               date="AUGUST 5, 2024"
-              image="/event/sytron5.jpeg"
+              image="/event/sytron (5).jpeg"
               index={6}
             />
           </div>

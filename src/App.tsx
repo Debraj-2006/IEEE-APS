@@ -295,9 +295,9 @@ const TeamMember = ({ name, role, image, badge, index = 0 }: any) => (
 
 // EDIT YOUR SOCIAL MEDIA LINKS HERE:
 const SOCIAL_LINKS = {
-  linkedin: "https://linkedin.com/company/ieee-aps-iem",
-  instagram: "https://instagram.com/ieee_aps_iem",
-  facebook: "https://facebook.com/ieeeapsiem"
+  linkedin: "https://www.linkedin.com/company/ieee-iem-aps-student-branch-chapter/",
+  instagram: "https://www.instagram.com/ieeeiemaps.official?igsh=MWh2dTY5bjU2aHNrdA==",
+  facebook: ""
 };
 
 export default function App() {
@@ -351,15 +351,21 @@ export default function App() {
 
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex items-center gap-4 text-primary/60">
-              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                <Linkedin size={16} />
-              </a>
-              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                <Instagram size={16} />
-              </a>
-              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                <Facebook size={16} />
-              </a>
+              {SOCIAL_LINKS.linkedin && (
+                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                  <Linkedin size={16} />
+                </a>
+              )}
+              {SOCIAL_LINKS.instagram && (
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                  <Instagram size={16} />
+                </a>
+              )}
+              {SOCIAL_LINKS.facebook && (
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
+                  <Facebook size={16} />
+                </a>
+              )}
             </div>
             <a
               href="/how-to-join-aps.pdf"
@@ -422,15 +428,21 @@ export default function App() {
                 </div>
 
                 <div className="flex justify-around items-center py-4 border-t border-outline-variant/10 mt-4">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                    <Linkedin size={18} />
-                  </a>
-                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                    <Instagram size={18} />
-                  </a>
-                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                    <Facebook size={18} />
-                  </a>
+                  {SOCIAL_LINKS.linkedin && (
+                    <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                      <Linkedin size={18} />
+                    </a>
+                  )}
+                  {SOCIAL_LINKS.instagram && (
+                    <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                      <Instagram size={18} />
+                    </a>
+                  )}
+                  {SOCIAL_LINKS.facebook && (
+                    <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
+                      <Facebook size={18} />
+                    </a>
+                  )}
                 </div>
 
                 <div className="mt-auto pb-4">
@@ -942,7 +954,7 @@ export default function App() {
             color: "from-[#1877F2] to-[#3b5998]",
             shadow: "rgba(24,119,242,0.4)" 
           }
-        ].map((social, idx) => (
+        ].filter(social => social.url && social.url !== "").map((social, idx) => (
           <motion.a
             key={social.name}
             href={social.url}
@@ -1021,15 +1033,21 @@ export default function App() {
                 Advancing the frontiers of electromagnetics, antennas, and wave propagation through tactical innovation at IEM, Kolkata.
               </p>
               <div className="flex gap-6">
-                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#0077B5] hover:border-[#0077B5]/40 hover:shadow-[0_0_15px_rgba(0,119,181,0.3)] transition-all duration-300">
-                  <Linkedin size={18} />
-                </a>
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#F56040] hover:border-[#F56040]/40 hover:shadow-[0_0_15px_rgba(245,96,64,0.3)] transition-all duration-300">
-                  <Instagram size={18} />
-                </a>
-                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:shadow-[0_0_15px_rgba(24,119,242,0.3)] transition-all duration-300">
-                  <Facebook size={18} />
-                </a>
+                {SOCIAL_LINKS.linkedin && (
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#0077B5] hover:border-[#0077B5]/40 hover:shadow-[0_0_15px_rgba(0,119,181,0.3)] transition-all duration-300">
+                    <Linkedin size={18} />
+                  </a>
+                )}
+                {SOCIAL_LINKS.instagram && (
+                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#F56040] hover:border-[#F56040]/40 hover:shadow-[0_0_15px_rgba(245,96,64,0.3)] transition-all duration-300">
+                    <Instagram size={18} />
+                  </a>
+                )}
+                {SOCIAL_LINKS.facebook && (
+                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 glass-card flex items-center justify-center text-on-surface-variant/50 hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:shadow-[0_0_15px_rgba(24,119,242,0.3)] transition-all duration-300">
+                    <Facebook size={18} />
+                  </a>
+                )}
               </div>
             </div>
 

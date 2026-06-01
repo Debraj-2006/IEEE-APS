@@ -344,6 +344,7 @@ export default function App() {
             <NavItem href="#benefits" label="Benefits" />
             <NavItem href="#team" label="Team" />
             <NavItem href="#contact" label="Contact" />
+            <NavItem href="#social" label="Social" />
           </div>
 
           <div className="flex items-center gap-6">
@@ -422,6 +423,7 @@ export default function App() {
                   <a href="#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</a>
                   <a href="#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</a>
                   <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Contact</a>
+                  <a href="#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</a>
                 </div>
 
                 <div className="flex justify-around items-center py-4 border-t border-outline-variant/10 mt-4">
@@ -918,6 +920,156 @@ export default function App() {
                 </button>
               </form>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Hub Section */}
+      <section id="social" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 hex-grid-bg opacity-30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.03)_0%,transparent_70%)]" />
+
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
+              <Signal size={16} className="text-primary" />
+              <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
+            </div>
+            <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Social Uplink</h2>
+            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">Connect with us across all communication channels</p>
+            <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* LinkedIn Card */}
+            <motion.a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative glass-panel border border-outline-variant/20 hover:border-[#0077B5]/50 transition-all duration-500 overflow-hidden cursor-pointer"
+            >
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0077B5]/0 to-[#0077B5]/0 group-hover:from-[#0077B5]/10 group-hover:to-[#00a0dc]/5 transition-all duration-500" />
+              
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary/30 group-hover:border-[#0077B5] transition-colors duration-300" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary/30 group-hover:border-[#0077B5] transition-colors duration-300" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary/30 group-hover:border-[#0077B5] transition-colors duration-300" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary/30 group-hover:border-[#0077B5] transition-colors duration-300" />
+
+              <div className="relative p-10 flex flex-col items-center text-center">
+                {/* Status indicator */}
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#0077B5] rounded-full animate-pulse shadow-[0_0_6px_rgba(0,119,181,0.8)]" />
+                  <span className="font-label text-[8px] text-[#0077B5]/60 uppercase tracking-widest">Active</span>
+                </div>
+
+                <div className="w-20 h-20 flex items-center justify-center bg-[#0077B5]/10 border border-[#0077B5]/20 group-hover:bg-[#0077B5]/20 group-hover:border-[#0077B5]/40 transition-all duration-500 mb-6 group-hover:shadow-[0_0_30px_rgba(0,119,181,0.3)]">
+                  <Linkedin size={36} className="text-[#0077B5] group-hover:scale-110 transition-transform duration-300" />
+                </div>
+
+                <h3 className="font-headline text-xl font-black uppercase tracking-tight mb-2 group-hover:text-[#0077B5] transition-colors">LinkedIn</h3>
+                <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-[0.25em] mb-6">Professional Network</p>
+                <p className="font-body text-sm text-on-surface-variant/60 leading-relaxed mb-8">Follow our chapter for updates on events, research breakthroughs, and professional development opportunities.</p>
+                
+                <div className="flex items-center gap-2 text-[#0077B5] font-label text-[10px] uppercase tracking-widest font-bold group-hover:gap-4 transition-all duration-300">
+                  <span>Connect</span>
+                  <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </div>
+            </motion.a>
+
+            {/* Instagram Card */}
+            <motion.a
+              href={SOCIAL_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative glass-panel border border-outline-variant/20 hover:border-[#E1306C]/50 transition-all duration-500 overflow-hidden cursor-pointer"
+            >
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833AB4]/0 via-[#FD1D1D]/0 to-[#F56040]/0 group-hover:from-[#833AB4]/10 group-hover:via-[#FD1D1D]/5 group-hover:to-[#F56040]/10 transition-all duration-500" />
+              
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary/30 group-hover:border-[#E1306C] transition-colors duration-300" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary/30 group-hover:border-[#E1306C] transition-colors duration-300" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary/30 group-hover:border-[#E1306C] transition-colors duration-300" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary/30 group-hover:border-[#E1306C] transition-colors duration-300" />
+
+              <div className="relative p-10 flex flex-col items-center text-center">
+                {/* Status indicator */}
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#E1306C] rounded-full animate-pulse shadow-[0_0_6px_rgba(225,48,108,0.8)]" />
+                  <span className="font-label text-[8px] text-[#E1306C]/60 uppercase tracking-widest">Active</span>
+                </div>
+
+                <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-[#833AB4]/10 via-[#FD1D1D]/10 to-[#F56040]/10 border border-[#E1306C]/20 group-hover:from-[#833AB4]/20 group-hover:via-[#FD1D1D]/20 group-hover:to-[#F56040]/20 group-hover:border-[#E1306C]/40 transition-all duration-500 mb-6 group-hover:shadow-[0_0_30px_rgba(225,48,108,0.3)]">
+                  <Instagram size={36} className="text-[#E1306C] group-hover:scale-110 transition-transform duration-300" />
+                </div>
+
+                <h3 className="font-headline text-xl font-black uppercase tracking-tight mb-2 group-hover:text-[#E1306C] transition-colors">Instagram</h3>
+                <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-[0.25em] mb-6">Visual Feed</p>
+                <p className="font-body text-sm text-on-surface-variant/60 leading-relaxed mb-8">Explore behind-the-scenes moments, event highlights, and the creative side of our antenna research community.</p>
+                
+                <div className="flex items-center gap-2 text-[#E1306C] font-label text-[10px] uppercase tracking-widest font-bold group-hover:gap-4 transition-all duration-300">
+                  <span>Follow</span>
+                  <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </div>
+            </motion.a>
+
+            {/* Gmail Card */}
+            <motion.a
+              href="mailto:ieeeiemaps.sbc@gmail.com"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative glass-panel border border-outline-variant/20 hover:border-[#EA4335]/50 transition-all duration-500 overflow-hidden cursor-pointer"
+            >
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#EA4335]/0 to-[#FBBC05]/0 group-hover:from-[#EA4335]/10 group-hover:to-[#FBBC05]/5 transition-all duration-500" />
+              
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary/30 group-hover:border-[#EA4335] transition-colors duration-300" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary/30 group-hover:border-[#EA4335] transition-colors duration-300" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary/30 group-hover:border-[#EA4335] transition-colors duration-300" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary/30 group-hover:border-[#EA4335] transition-colors duration-300" />
+
+              <div className="relative p-10 flex flex-col items-center text-center">
+                {/* Status indicator */}
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#34A853] rounded-full animate-pulse shadow-[0_0_6px_rgba(52,168,83,0.8)]" />
+                  <span className="font-label text-[8px] text-[#34A853]/60 uppercase tracking-widest">Online</span>
+                </div>
+
+                <div className="w-20 h-20 flex items-center justify-center bg-[#EA4335]/10 border border-[#EA4335]/20 group-hover:bg-[#EA4335]/20 group-hover:border-[#EA4335]/40 transition-all duration-500 mb-6 group-hover:shadow-[0_0_30px_rgba(234,67,53,0.3)]">
+                  <Mail size={36} className="text-[#EA4335] group-hover:scale-110 transition-transform duration-300" />
+                </div>
+
+                <h3 className="font-headline text-xl font-black uppercase tracking-tight mb-2 group-hover:text-[#EA4335] transition-colors">Gmail</h3>
+                <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-[0.25em] mb-6">Direct Channel</p>
+                <p className="font-body text-sm text-on-surface-variant/60 leading-relaxed mb-4">Reach out directly for collaborations, membership inquiries, or event partnerships.</p>
+                <p className="font-label text-[10px] text-on-surface-variant/40 uppercase tracking-widest mb-6">ieeeiemaps.sbc@gmail.com</p>
+                
+                <div className="flex items-center gap-2 text-[#EA4335] font-label text-[10px] uppercase tracking-widest font-bold group-hover:gap-4 transition-all duration-300">
+                  <span>Send Mail</span>
+                  <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </div>
+            </motion.a>
           </div>
         </div>
       </section>

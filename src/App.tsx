@@ -854,7 +854,7 @@ export default function App() {
                   </div>
                   <div>
                     <p className="font-label text-[10px] uppercase text-primary tracking-[0.3em] mb-2 font-bold">Email Uplink</p>
-                    <p className="text-md font-body font-light uppercase tracking-widest">comms.aps@iem.edu.in</p>
+                    <a href="mailto:ieeeiemaps.sbc@gmail.com" className="text-md font-body font-light uppercase tracking-widest hover:text-primary transition-all duration-300 decoration-primary hover:underline hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">ieeeiemaps.sbc@gmail.com</a>
                   </div>
                 </div>
               </div>

@@ -707,7 +707,7 @@ export default function App() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-MATLAB"
                 title="MATLAB Workshop"
                 date="JUNE 20, 2024"
@@ -715,7 +715,7 @@ export default function App() {
                 index={0}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-PROMPTX"
                 title="PromptX Seminar"
                 date="JUNE 25, 2024"
@@ -723,7 +723,7 @@ export default function App() {
                 index={1}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-SYTRON1"
                 title="Sytron"
                 date="JULY 15, 2024"
@@ -731,7 +731,7 @@ export default function App() {
                 index={2}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-SYTRON2"
                 title="Sytron"
                 date="JULY 20, 2024"
@@ -739,7 +739,7 @@ export default function App() {
                 index={3}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-SYTRON3"
                 title="Sytron"
                 date="JULY 25, 2024"
@@ -747,7 +747,7 @@ export default function App() {
                 index={4}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-SYTRON4"
                 title="Sytron"
                 date="AUGUST 1, 2024"
@@ -755,7 +755,7 @@ export default function App() {
                 index={5}
               />
               <EventCard 
-                status="Upcoming"
+                status="Completed"
                 code="OP-SYTRON5"
                 title="Sytron"
                 date="AUGUST 5, 2024"

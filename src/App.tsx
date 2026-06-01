@@ -710,30 +710,20 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <EventCard 
-              status="Completed"
-              code="OP-ECHO"
-              title="Electromagnetics 101"
-              date="JAN 15, 2024"
-              image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
-              reportLink="#"
+              status="Upcoming"
+              code="OP-MATLAB"
+              title="MATLAB Workshop"
+              date="JUNE 20, 2024"
+              image="/event/matlab.jpeg"
               index={0}
             />
             <EventCard 
               status="Upcoming"
-              code="OP-SIGNAL"
-              title="Antenna Design Masterclass"
-              date="JUNE 12, 2024"
-              image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800"
+              code="OP-PROMPTX"
+              title="PromptX Seminar"
+              date="JUNE 25, 2024"
+              image="/event/promptx.jpeg"
               index={1}
-            />
-            <EventCard 
-              status="Completed"
-              code="OP-VOX"
-              title="Propagate 2023 Seminar"
-              date="DEC 05, 2023"
-              image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
-              reportLink="#"
-              index={2}
             />
           </div>
         </div>

@@ -705,8 +705,15 @@ export default function App() {
               <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-primary">UPCOMING OPERATIONS</h3>
               <div className="w-12 h-[2px] gradient-line-animated mt-4" />
             </div>
-            <div className="text-center py-8">
-              <p className="text-on-surface-variant/60 font-label uppercase tracking-widest">No upcoming operations at this time</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <EventCard 
+                status="Upcoming"
+                code="OP-ECLYPSE"
+                title="Eclypse Post"
+                date="COMING SOON"
+                image="/event/eclypse.jpeg"
+                index={0}
+              />
             </div>
           </div>
 

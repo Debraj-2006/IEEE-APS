@@ -773,6 +773,7 @@ export default function App() {
                 index={6}
               />
             </div>
+          </div>
         </div>
       </section>
 

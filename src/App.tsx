@@ -24,7 +24,8 @@ import {
   Signal,
   Shield,
   Award,
-  BookOpen
+  BookOpen,
+  FileText
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Antenna3D } from "./components/Antenna3D";
@@ -343,9 +344,15 @@ export default function App() {
               <Network size={18} className="cursor-pointer hover:text-primary transition-colors" />
               <Terminal size={18} className="cursor-pointer hover:text-primary transition-colors" />
             </div>
-            <button className="hidden md:block bg-primary text-on-primary font-label uppercase tracking-widest text-[10px] px-6 py-2.5 font-black hover:bg-white transition-all active:scale-95 glow-primary">
+            <a
+              href="/how-to-join-aps.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 bg-primary text-on-primary font-label uppercase tracking-widest text-[10px] px-6 py-2.5 font-black hover:bg-white transition-all active:scale-95 glow-primary"
+            >
+              <FileText size={12} />
               Join Chapter
-            </button>
+            </a>
             <button 
               className="md:hidden text-primary hover:text-white transition-colors p-2"
               onClick={() => setMobileMenuOpen(true)}
@@ -460,9 +467,15 @@ export default function App() {
               transition={{ delay: 0.7 }}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center lg:items-start w-full sm:w-auto"
             >
-              <button className="w-full sm:w-auto px-12 py-4 bg-primary text-on-primary font-label font-black uppercase tracking-[0.2em] text-xs glow-primary hover:bg-white transition-all glitch-hover">
+              <a
+                href="/how-to-join-aps.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-12 py-4 bg-primary text-on-primary font-label font-black uppercase tracking-[0.2em] text-xs glow-primary hover:bg-white transition-all glitch-hover flex items-center justify-center gap-2"
+              >
+                <FileText size={14} />
                 Join the Mission
-              </button>
+              </a>
               <button className="w-full sm:w-auto px-12 py-4 border border-primary/40 text-primary font-label font-black uppercase tracking-[0.2em] text-xs hover:bg-primary/10 transition-all">
                 View Dossier
               </button>
@@ -870,6 +883,39 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Floating PDF Button */}
+      <motion.a
+        href="/how-to-join-aps.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="How to Join APS — Open Guide"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2, type: "spring", stiffness: 200, damping: 15 }}
+        whileHover={{ scale: 1.12, boxShadow: "0 0 32px rgba(0,212,255,0.7)" }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-8 right-8 z-[200] flex flex-col items-center gap-1 group"
+      >
+        {/* Pulse ring */}
+        <span className="absolute inset-0 rounded-none animate-ping bg-primary/20 pointer-events-none" style={{ borderRadius: 0 }} />
+        
+        {/* Button body */}
+        <span className="relative flex flex-col items-center justify-center w-16 h-16 bg-surface-dim border-2 border-primary/60 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-300 shadow-[0_0_24px_rgba(0,212,255,0.3)] group-hover:shadow-[0_0_36px_rgba(0,212,255,0.6)]">
+          {/* Corner accents */}
+          <span className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-primary" />
+          <span className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-primary" />
+          <span className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-primary" />
+          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-primary" />
+
+          <FileText size={26} className="text-primary group-hover:text-white transition-colors drop-shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
+        </span>
+
+        {/* Label tooltip */}
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap bg-surface-dim border border-primary/30 text-primary font-label text-[9px] uppercase tracking-[0.25em] px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_12px_rgba(0,212,255,0.2)]">
+          How to Join APS
+        </span>
+      </motion.a>
 
       {/* Footer */}
       <footer className="relative py-24 px-8 bg-surface-dim border-t border-outline-variant/10 overflow-hidden">

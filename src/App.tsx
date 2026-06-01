@@ -705,6 +705,17 @@ export default function App() {
               <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-primary">UPCOMING OPERATIONS</h3>
               <div className="w-12 h-[2px] gradient-line-animated mt-4" />
             </div>
+            <div className="text-center py-8">
+              <p className="text-on-surface-variant/60 font-label uppercase tracking-widest">No upcoming operations at this time</p>
+            </div>
+          </div>
+
+          {/* Previous Events */}
+          <div>
+            <div className="mb-12">
+              <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-on-surface-variant">PREVIOUS OPERATIONS</h3>
+              <div className="w-12 h-[2px] bg-on-surface-variant/30 mt-4" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <EventCard 
                 status="Completed"

@@ -1,6 +1,6 @@
 {
   "name": "IEEE APS IEM | Tactical Interface",
   "description": "Official website for IEEE Antennas and Propagation Society IEM Student Branch Chapter, featuring a high-tech tactical command interface.",
-  "url": "https://ieeeaps-iem.netlify.app/",
+  "url": "https://ieee-aps.vercel.app/",
   "requestFramePermissions": []
 }

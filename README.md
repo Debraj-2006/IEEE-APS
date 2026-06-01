@@ -6,7 +6,7 @@
 
 Official website for IEEE Antennas and Propagation Society IEM Student Branch Chapter.
 
-**🌐 Live Site:** https://ieeeaps-iem.netlify.app/
+**🌐 Live Site:** https://ieee-aps.vercel.app/
 
 **View your app in AI Studio:** https://ai.studio/apps/000a7d6e-8054-4391-b67a-1a35d4e2ceb8
 

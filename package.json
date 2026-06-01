@@ -1,7 +1,7 @@
 {
   "name": "ieee-aps-iem-website",
   "description": "Official website for IEEE Antennas and Propagation Society IEM Student Branch Chapter",
-  "homepage": "https://ieeeaps-iem.netlify.app/",
+  "homepage": "https://ieee-aps.vercel.app/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

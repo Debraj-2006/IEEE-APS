@@ -18,7 +18,7 @@ const leftPanels: PanelData[] = [
 const rightPanels: PanelData[] = [
   { id: 'systems', title: 'SYSTEMS', icon: '⬡', sections: ['Thermal Control', 'Propulsion', 'Power Grid'], link: '#systems' },
   { id: 'history', title: 'HISTORY', icon: '○', sections: ['Launch Date', 'Orbit Count', 'Data Points'], link: '#history' },
-  { id: 'contact', title: 'CONTACT', icon: '△', sections: ['Signal Lock', 'Band: X-Ray', 'Latency: 12ms'], link: '#contact' },
+  
 ];
 
 interface ClickableArea {

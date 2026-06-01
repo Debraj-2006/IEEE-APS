@@ -343,28 +343,10 @@ export default function App() {
             <NavItem href="#events" label="Events" />
             <NavItem href="#benefits" label="Benefits" />
             <NavItem href="#team" label="Team" />
-            <NavItem href="#contact" label="Contact" />
             <NavItem href="#social" label="Social" />
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden sm:flex items-center gap-4 text-primary/60">
-              {SOCIAL_LINKS.linkedin && (
-                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                  <Linkedin size={16} />
-                </a>
-              )}
-              {SOCIAL_LINKS.instagram && (
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                  <Instagram size={16} />
-                </a>
-              )}
-              {SOCIAL_LINKS.facebook && (
-                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">
-                  <Facebook size={16} />
-                </a>
-              )}
-            </div>
             <a
               href="/how-to-join-aps.pdf"
               target="_blank"
@@ -422,26 +404,7 @@ export default function App() {
                   <a href="#events" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Events</a>
                   <a href="#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</a>
                   <a href="#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</a>
-                  <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Contact</a>
                   <a href="#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</a>
-                </div>
-
-                <div className="flex justify-around items-center py-4 border-t border-outline-variant/10 mt-4">
-                  {SOCIAL_LINKS.linkedin && (
-                    <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                      <Linkedin size={18} />
-                    </a>
-                  )}
-                  {SOCIAL_LINKS.instagram && (
-                    <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                      <Instagram size={18} />
-                    </a>
-                  )}
-                  {SOCIAL_LINKS.facebook && (
-                    <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">
-                      <Facebook size={18} />
-                    </a>
-                  )}
                 </div>
 
                 <div className="mt-auto pb-4">
@@ -822,108 +785,6 @@ export default function App() {
       {/* Team Section */}
       <TeamSection />
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-8 bg-surface">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
-              <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-8">
-                <TerminalText text="TRANSMISSION TERMINAL" delay={0.5} />
-              </h2>
-              <p className="text-on-surface-variant font-body text-lg font-light mb-12 max-w-lg opacity-80 text-center lg:text-left">
-                Initiate a secure communication link for inquiries, collaborations, or mission deployment. All transmissions are encrypted and logged.
-              </p>
-              
-              <div className="space-y-12 w-full">
-                <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-6 group">
-                  <div className="p-3 bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-500">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <p className="font-label text-[10px] uppercase text-primary tracking-[0.3em] mb-2 font-bold">Deployment Zone</p>
-                    <p className="text-md font-body font-light uppercase tracking-widest leading-relaxed">
-                      Institute of Engineering & Management<br />
-                      Salt Lake, Kolkata, West Bengal
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-6 group">
-                  <div className="p-3 bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-on-primary transition-all duration-500">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <p className="font-label text-[10px] uppercase text-primary tracking-[0.3em] mb-2 font-bold">Email Uplink</p>
-                    <a href="mailto:ieeeiemaps.sbc@gmail.com" className="text-md font-body font-light uppercase tracking-widest hover:text-primary transition-all duration-300 decoration-primary hover:underline hover:drop-shadow-[0_0_8px_rgba(0,212,255,0.6)]">ieeeiemaps.sbc@gmail.com</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-16 h-64 border border-outline-variant/20 relative grayscale contrast-125 group overflow-hidden corner-accent">
-                <img 
-                  src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000" 
-                  alt="map" 
-                  className="w-full h-full object-cover object-[70%_40%] scale-[2.2] opacity-40 group-hover:scale-[2.4] transition-transform duration-1000 origin-center"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="w-12 h-12 bg-primary/20 animate-ping absolute -inset-3 rounded-full" />
-                    <div className="w-6 h-6 bg-primary glow-primary relative rounded-full border-2 border-white/20 shadow-[0_0_20px_rgba(0,212,255,0.8)]" />
-                  </div>
-                </div>
-                {/* Map HUD Overlay */}
-                <div className="absolute top-4 left-4 font-label text-[8px] text-primary/60 uppercase tracking-widest">
-                  Target: HQ_IEM_KOLKATA
-                </div>
-                <div className="absolute bottom-4 right-4 flex gap-2">
-                  <div className="w-1 h-1 bg-primary animate-pulse" />
-                  <div className="w-1 h-1 bg-primary animate-pulse delay-75" />
-                  <div className="w-1 h-1 bg-primary animate-pulse delay-150" />
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-panel p-12 border border-outline-variant/20 relative">
-              <div className="absolute top-0 left-0 w-2 h-2 bg-primary" />
-              <div className="absolute top-0 right-0 w-2 h-2 bg-primary" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 bg-primary" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-primary" />
-
-              <form className="space-y-10">
-                <div className="space-y-2">
-                  <label className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-bold">Agent Name</label>
-                  <input 
-                    type="text" 
-                    className="w-full bg-surface-container-highest/30 border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-label uppercase text-sm tracking-widest py-4 transition-all"
-                    placeholder="IDENTIFY YOURSELF"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-bold">Frequency ID (Email)</label>
-                  <input 
-                    type="email" 
-                    className="w-full bg-surface-container-highest/30 border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-label uppercase text-sm tracking-widest py-4 transition-all"
-                    placeholder="EMAIL@DOMAIN.COM"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-bold">Mission Brief (Message)</label>
-                  <textarea 
-                    rows={4}
-                    className="w-full bg-surface-container-highest/30 border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-label uppercase text-sm tracking-widest py-4 transition-all resize-none"
-                    placeholder="TRANSMISSION DATA..."
-                  />
-                </div>
-                <button className="w-full py-5 bg-primary text-on-primary font-label font-black uppercase tracking-[0.4em] text-xs glow-primary hover:bg-white transition-all active:scale-[0.98]">
-                  Send Transmission
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Social Hub Section */}
       <section id="social" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
         {/* Background effects */}
@@ -1074,63 +935,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Floating Social Media Tab / Side Panel */}
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 2.2 }}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-[200] hidden md:flex flex-col gap-1.5"
-      >
-        {[
-          { 
-            name: "LinkedIn", 
-            icon: Linkedin, 
-            url: SOCIAL_LINKS.linkedin, 
-            color: "from-[#0077B5] to-[#00a0dc]",
-            shadow: "rgba(0,119,181,0.4)" 
-          },
-          { 
-            name: "Instagram", 
-            icon: Instagram, 
-            url: SOCIAL_LINKS.instagram, 
-            color: "from-[#833AB4] via-[#FD1D1D] to-[#F56040]",
-            shadow: "rgba(253,29,29,0.4)" 
-          },
-          { 
-            name: "Facebook", 
-            icon: Facebook, 
-            url: SOCIAL_LINKS.facebook, 
-            color: "from-[#1877F2] to-[#3b5998]",
-            shadow: "rgba(24,119,242,0.4)" 
-          }
-        ].filter(social => social.url && social.url !== "").map((social, idx) => (
-          <motion.a
-            key={social.name}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 8 }}
-            className="flex items-center group relative"
-          >
-            {/* Tab Body */}
-            <div className={`flex items-center justify-center w-11 h-11 bg-surface-dim border border-l-0 border-primary/20 group-hover:border-primary/60 transition-all duration-300 relative overflow-hidden`}>
-              {/* Slide-in color gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0`} />
-              
-              {/* Corner Accents */}
-              <span className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-primary/30 group-hover:border-white transition-colors" />
-              <span className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-primary/30 group-hover:border-white transition-colors" />
-
-              <social.icon size={18} className="text-primary group-hover:text-white transition-all duration-300 z-10 relative drop-shadow-[0_0_4px_rgba(0,212,255,0.4)]" />
-            </div>
-
-            {/* Label Tooltip */}
-            <div className="absolute left-full ml-2 px-3 py-1 bg-surface-dim border border-primary/30 text-primary font-label text-[9px] uppercase tracking-[0.2em] whitespace-nowrap opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300 pointer-events-none shadow-[0_0_12px_rgba(0,212,255,0.2)]">
-              {social.name}
-            </div>
-          </motion.a>
-        ))}
-      </motion.div>
 
       {/* Floating PDF Button */}
       <motion.a
@@ -1204,7 +1008,7 @@ export default function App() {
             <div>
               <h4 className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold mb-8">Navigation</h4>
               <div className="space-y-4">
-                {[{label: 'About', href: '#about'}, {label: 'Events', href: '#events'}, {label: 'Benefits', href: '#benefits'}, {label: 'Team', href: '#team'}, {label: 'Contact', href: '#contact'}].map(link => (
+                {[{label: 'About', href: '#about'}, {label: 'Events', href: '#events'}, {label: 'Benefits', href: '#benefits'}, {label: 'Team', href: '#team'}].map(link => (
                   <a key={link.label} href={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
                     <ChevronRight size={12} className="text-primary/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     {link.label}

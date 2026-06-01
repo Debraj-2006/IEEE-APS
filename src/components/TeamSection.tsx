@@ -21,6 +21,22 @@ import {
 
 /* ─── Member Data ─── */
 const MEMBERS = [
+  /* ── Faculty Adviser ── */
+  {
+    name: "Srijita Chakraborty",
+    role: "Faculty Adviser",
+    committee: "Faculty Adviser",
+    image: "/picture/adviser.jpeg",
+    badge: "Faculty Adviser",
+    about: "Faculty adviser guiding IEEE APS IEM Student Branch Chapter with expertise and strategic direction.",
+    skills: [],
+    projects: [],
+    publications: [],
+    experience: [],
+    certifications: [],
+    email: "",
+    linkedin: "#",
+  },
   /* ── Executive Committee ── */
   {
     name: "Soham Karak",
@@ -513,6 +529,7 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
 
 /* ─── Main Team Section ─── */
 export const TeamSection = () => {
+  const facultyMembers = MEMBERS.filter((m) => m.committee === "Faculty Adviser");
   const execMembers = MEMBERS.filter((m) => m.committee === "Executive Committee");
   const coreMembers = MEMBERS.filter((m) => m.committee === "Core Committee");
 
@@ -532,6 +549,22 @@ export const TeamSection = () => {
           <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">The operatives behind the mission</p>
           <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
         </div>
+
+        {/* Faculty Adviser */}
+        {facultyMembers.length > 0 && (
+          <div className="mb-20">
+            <div className="flex items-center gap-3 mb-10">
+              <Award size={14} className="text-primary" />
+              <h3 className="font-headline text-xl font-black uppercase tracking-tight text-on-surface">Faculty Adviser</h3>
+              <div className="h-[1px] flex-grow bg-gradient-to-r from-primary/20 to-transparent" />
+            </div>
+            <div className="flex justify-center">
+              {facultyMembers.map((member, i) => (
+                <MemberCard key={member.name} member={member} index={i} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Executive Committee */}
         <div className="mb-20">

@@ -1,5 +1,7 @@
 {
-  "name": "react-example",
+  "name": "ieee-aps-iem-website",
+  "description": "Official website for IEEE Antennas and Propagation Society IEM Student Branch Chapter",
+  "homepage": "https://ieeeaps-iem.netlify.app/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -30,6 +32,7 @@
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
+    "netlify-cli": "^26.1.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ChevronLeft, Calendar, MapPin, ArrowUpRight } from "lucide-react";
@@ -36,6 +37,10 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
 
 export function InitiativeDetails() {
   const { type } = useParams<{ type: string }>();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   // Fallback if category not found
   const data = type && CATEGORY_DATA[type] ? CATEGORY_DATA[type] : { title: "Initiative", description: "Details about this initiative.", events: [] };

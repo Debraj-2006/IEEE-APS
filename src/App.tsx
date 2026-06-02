@@ -331,7 +331,7 @@ export default function App() {
           <div className="hidden md:flex gap-10 items-center">
             <NavItem href="#" label="Home" active />
             <NavItem href="#about" label="About" />
-            <NavItem href="#events" label="Events" />
+            <NavItem href="#initiatives" label="Initiatives" />
             <NavItem href="#benefits" label="Benefits" />
             <NavItem href="#team" label="Team" />
             <NavItem href="#social" label="Social" />
@@ -392,7 +392,7 @@ export default function App() {
                 <div className="flex flex-col gap-6">
                   <a href="#" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-primary border-b border-primary/20 pb-4">Home</a>
                   <a href="#about" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">About</a>
-                  <a href="#events" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Events</a>
+                  <a href="#initiatives" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Initiatives</a>
                   <a href="#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</a>
                   <a href="#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</a>
                   <a href="#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</a>
@@ -529,7 +529,7 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             {[
               { label: "Active Members", value: "150+", icon: Users },
-              { label: "Events Completed", value: "42", icon: Signal },
+              { label: "Initiatives Completed", value: "42", icon: Signal },
               { label: "Research Papers", value: "12", icon: BookOpen },
               { label: "Tech Readiness", value: "98%", icon: Cpu },
             ].map((stat, i) => (
@@ -676,8 +676,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section id="events" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
+      {/* Initiatives Section */}
+      <section id="initiatives" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
         {/* Background hex grid */}
         <div className="absolute inset-0 hex-grid-bg opacity-50" />
         
@@ -689,98 +689,45 @@ export default function App() {
                 <div className="w-12 h-[1px] gradient-line-animated" />
               </div>
               <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-4">
-                <TerminalText text="MISSION LOG" delay={0.5} />
+                <TerminalText text="INITIATIVES" delay={0.5} />
               </h2>
-              <p className="font-label text-[10px] text-primary/60 tracking-[0.4em] uppercase font-bold">Past & Future Operations</p>
-            </div>
-            <div className="flex gap-4 w-full justify-center lg:justify-end">
-              <button className="px-8 py-3 glass-card font-label text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all font-bold">All Ops</button>
-              <button className="px-8 py-3 bg-primary/10 border border-primary/40 font-label text-[10px] uppercase tracking-widest text-primary transition-all font-bold hover:bg-primary/20">Active Only</button>
+              <p className="font-label text-[10px] text-primary/60 tracking-[0.4em] uppercase font-bold">Programs & Operations</p>
             </div>
           </div>
 
-          {/* Upcoming Events */}
-          <div className="mb-16">
-            <div className="mb-12">
-              <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-primary">UPCOMING OPERATIONS</h3>
-              <div className="w-12 h-[2px] gradient-line-animated mt-4" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <EventCard 
-                status="Upcoming"
-                code="OP-ECLYPSE"
-                title="Eclypse Post"
-                date="COMING SOON"
-                image="/event/eclypse.jpeg"
-                index={0}
-              />
-            </div>
-          </div>
-
-          {/* Previous Events */}
-          <div>
-            <div className="mb-12">
-              <h3 className="font-headline text-2xl font-black uppercase tracking-tight text-on-surface-variant">PREVIOUS OPERATIONS</h3>
-              <div className="w-12 h-[2px] bg-on-surface-variant/30 mt-4" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <EventCard 
-                status="Completed"
-                code="OP-MATLAB"
-                title="MATLAB Workshop"
-                date="JUNE 20, 2024"
-                image="/event/matlab.jpeg"
-                index={0}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-PROMPTX"
-                title="PromptX Seminar"
-                date="JUNE 25, 2024"
-                image="/event/promptx.jpeg"
-                index={1}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-SYTRON1"
-                title="Sytron"
-                date="JULY 15, 2024"
-                image="/event/sytron.jpeg"
-                index={2}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-SYTRON2"
-                title="Sytron"
-                date="JULY 20, 2024"
-                image="/event/sytron (2).jpeg"
-                index={3}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-SYTRON3"
-                title="Sytron"
-                date="JULY 25, 2024"
-                image="/event/sytron (3).jpeg"
-                index={4}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-SYTRON4"
-                title="Sytron"
-                date="AUGUST 1, 2024"
-                image="/event/sytron (4).jpeg"
-                index={5}
-              />
-              <EventCard 
-                status="Completed"
-                code="OP-SYTRON5"
-                title="Sytron"
-                date="AUGUST 5, 2024"
-                image="/event/sytron (5).jpeg"
-                index={6}
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <EventCard 
+              status="Active"
+              code="IN-WEBINAR"
+              title="Webinar"
+              date="ONGOING"
+              image="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600"
+              index={0}
+            />
+            <EventCard 
+              status="Active"
+              code="IN-WORKSHOP"
+              title="Workshop"
+              date="ONGOING"
+              image="https://images.unsplash.com/photo-1588196749597-9ff046f140fb?auto=format&fit=crop&q=80&w=600"
+              index={1}
+            />
+            <EventCard 
+              status="Active"
+              code="IN-TECHTALK"
+              title="Tech Talk"
+              date="ONGOING"
+              image="https://images.unsplash.com/photo-1475721025505-c9a87ff9e4cb?auto=format&fit=crop&q=80&w=600"
+              index={2}
+            />
+            <EventCard 
+              status="Active"
+              code="IN-INDUSTRY"
+              title="Industrial Visit"
+              date="ONGOING"
+              image="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=600"
+              index={3}
+            />
           </div>
         </div>
       </section>
@@ -1054,7 +1001,7 @@ export default function App() {
             <div>
               <h4 className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold mb-8">Navigation</h4>
               <div className="space-y-4">
-                {[{label: 'About', href: '#about'}, {label: 'Events', href: '#events'}, {label: 'Benefits', href: '#benefits'}, {label: 'Team', href: '#team'}].map(link => (
+                {[{label: 'About', href: '#about'}, {label: 'Initiatives', href: '#initiatives'}, {label: 'Benefits', href: '#benefits'}, {label: 'Team', href: '#team'}].map(link => (
                   <a key={link.label} href={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
                     <ChevronRight size={12} className="text-primary/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     {link.label}
@@ -1073,7 +1020,7 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.6)]" />
-                  <span className="text-xs font-label text-on-surface-variant/60 uppercase tracking-wider">Events Scheduled</span>
+                  <span className="text-xs font-label text-on-surface-variant/60 uppercase tracking-wider">Initiatives Scheduled</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.6)]" />

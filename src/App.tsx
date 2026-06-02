@@ -134,7 +134,7 @@ const Metric = ({ label, value, progress }: { label: string; value: string; prog
   </div>
 );
 
-const EventCard = ({ status, code, title, date, image, reportLink, index = 0 }: any) => (
+const EventCard = ({ status, code, title, subtitle, date, image, reportLink, index = 0 }: any) => (
   <motion.div 
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -170,9 +170,9 @@ const EventCard = ({ status, code, title, date, image, reportLink, index = 0 }: 
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-6">
-        <h4 className="font-headline text-lg font-black text-on-surface uppercase tracking-tight mb-3 group-hover:text-primary transition-colors duration-300">{title}</h4>
+        <h4 className={`font-headline text-lg font-black text-on-surface uppercase tracking-tight ${subtitle ? 'mb-1' : 'mb-3'} group-hover:text-primary transition-colors duration-300`}>{title}</h4>
+        {subtitle && <p className="font-label text-xs text-primary uppercase tracking-widest mb-3 font-bold">{subtitle}</p>}
         <div className="flex justify-between items-center">
           <span className="text-[10px] font-label text-on-surface-variant/60 uppercase tracking-widest">{date}</span>
         </div>
@@ -707,7 +707,8 @@ export default function App() {
             <EventCard 
               status="Active"
               code="IN-WORKSHOP"
-              title="MATLAB Workshop"
+              title="Workshop"
+              subtitle="MATLAB"
               date="ONGOING"
               image="/event/matlab.jpeg"
               index={1}

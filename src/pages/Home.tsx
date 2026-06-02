@@ -600,6 +600,7 @@ export function Home() {
               title="Webinar"
               date="ONGOING"
               image="/event/eclypse.jpeg"
+              link="/initiatives/webinar"
               index={0}
             />
             <EventCard 
@@ -609,6 +610,7 @@ export function Home() {
               subtitle="MATLAB"
               date="ONGOING"
               image="/event/matlab.jpeg"
+              link="/initiatives/workshop"
               index={1}
             />
             <EventCard 
@@ -617,6 +619,7 @@ export function Home() {
               title="Tech Talk"
               date="ONGOING"
               image="/event/promptx.jpeg"
+              link="/initiatives/techtalk"
               index={2}
             />
             <EventCard 
@@ -625,6 +628,7 @@ export function Home() {
               title="Industrial Visit"
               date="ONGOING"
               image="/event/sytron.jpeg"
+              link="/initiatives/industry"
               index={3}
             />
           </div>

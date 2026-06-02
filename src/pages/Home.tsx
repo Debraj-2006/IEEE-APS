@@ -593,7 +593,7 @@ export function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             <EventCard 
               status="Active"
               code="IN-WEBINAR"
@@ -630,6 +630,15 @@ export function Home() {
               image="/event/sytron.jpeg"
               link="/initiatives/industry"
               index={3}
+            />
+            <EventCard 
+              status="Active"
+              code="IN-EVENT"
+              title="Events"
+              date="ONGOING"
+              image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80"
+              link="/initiatives/event"
+              index={4}
             />
           </div>
         </div>

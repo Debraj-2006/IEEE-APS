@@ -32,6 +32,13 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     events: [
       { id: 1, title: "Sytron Visit", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" }
     ]
+  },
+  event: {
+    title: "Special Events",
+    description: "Conferences, symposiums, and other major chapter gatherings.",
+    events: [
+      { id: 1, title: "Annual Symposium", date: "August 10, 2024", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" }
+    ]
   }
 };
 

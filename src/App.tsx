@@ -707,9 +707,9 @@ export default function App() {
             <EventCard 
               status="Active"
               code="IN-WORKSHOP"
-              title="Workshop"
+              title="MATLAB Workshop"
               date="ONGOING"
-              image="https://images.unsplash.com/photo-1588196749597-9ff046f140fb?auto=format&fit=crop&q=80&w=600"
+              image="/event/matlab.jpeg"
               index={1}
             />
             <EventCard 

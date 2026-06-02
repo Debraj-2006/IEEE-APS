@@ -701,7 +701,7 @@ export default function App() {
               code="IN-WEBINAR"
               title="Webinar"
               date="ONGOING"
-              image="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600"
+              image="/event/eclypse.jpeg"
               index={0}
             />
             <EventCard 
@@ -717,7 +717,7 @@ export default function App() {
               code="IN-TECHTALK"
               title="Tech Talk"
               date="ONGOING"
-              image="https://images.unsplash.com/photo-1475721025505-c9a87ff9e4cb?auto=format&fit=crop&q=80&w=600"
+              image="/event/promptx.jpeg"
               index={2}
             />
             <EventCard 
@@ -725,7 +725,7 @@ export default function App() {
               code="IN-INDUSTRY"
               title="Industrial Visit"
               date="ONGOING"
-              image="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80&w=600"
+              image="/event/sytron.jpeg"
               index={3}
             />
           </div>

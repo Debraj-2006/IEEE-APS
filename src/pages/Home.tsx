@@ -24,6 +24,7 @@ import {
   Shield,
   Award,
   BookOpen,
+  Calendar,
   FileText,
   Linkedin,
   Instagram,
@@ -591,6 +592,61 @@ export function Home() {
               </h2>
               <p className="font-label text-[10px] text-primary/60 tracking-[0.4em] uppercase font-bold">Programs & Operations</p>
             </div>
+          </div>
+
+          {/* Featured Upcoming Event */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.6)]" />
+              <span className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold">Upcoming Deployment</span>
+            </div>
+            
+            <Link to="/initiatives/event" className="block group">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card relative overflow-hidden border-primary/30 group-hover:border-primary/60 transition-colors"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-surface-dim via-surface-dim/80 to-transparent z-10" />
+                <img 
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" 
+                  alt="Annual Symposium" 
+                  className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                />
+                
+                <div className="relative z-20 p-8 md:p-12 max-w-3xl">
+                  <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6">
+                    Special Event
+                  </div>
+                  <h3 className="font-headline text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
+                    Annual Symposium 2024
+                  </h3>
+                  <p className="font-body text-on-surface-variant text-lg mb-8 max-w-xl">
+                    Join us for our flagship gathering of electromagnetic researchers, antenna engineers, and industry professionals.
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-6 mb-8">
+                    <div className="flex items-center gap-2 text-on-surface">
+                      <Calendar size={16} className="text-primary" />
+                      <span className="font-label text-xs uppercase tracking-widest">August 10, 2024</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-on-surface">
+                      <MapPin size={16} className="text-primary" />
+                      <span className="font-label text-xs uppercase tracking-widest">IEM Gurukul Campus</span>
+                    </div>
+                  </div>
+                  
+                  <div className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold group-hover:gap-4 transition-all">
+                    View Details
+                    <ArrowUpRight size={16} />
+                  </div>
+                </div>
+                
+                {/* Scan line effect */}
+                <div className="card-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+              </motion.div>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">

@@ -610,30 +610,30 @@ export function Home() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-surface-dim via-surface-dim/80 to-transparent z-10" />
                 <img 
-                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" 
-                  alt="Annual Symposium" 
+                  src="/event/eclypse.jpeg" 
+                  alt="Eclypse" 
                   className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 
                 <div className="relative z-20 p-8 md:p-12 max-w-3xl">
                   <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6">
-                    Special Event
+                    Webinar
                   </div>
                   <h3 className="font-headline text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
-                    Annual Symposium 2024
+                    Eclypse
                   </h3>
                   <p className="font-body text-on-surface-variant text-lg mb-8 max-w-xl">
-                    Join us for our flagship gathering of electromagnetic researchers, antenna engineers, and industry professionals.
+                    Online technical sessions and expert talks on various topics in electromagnetics and antennas.
                   </p>
                   
                   <div className="flex flex-wrap gap-6 mb-8">
                     <div className="flex items-center gap-2 text-on-surface">
                       <Calendar size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">August 10, 2024</span>
+                      <span className="font-label text-xs uppercase tracking-widest">Coming Soon</span>
                     </div>
                     <div className="flex items-center gap-2 text-on-surface">
                       <MapPin size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">IEM Gurukul Campus</span>
+                      <span className="font-label text-xs uppercase tracking-widest">Online (Virtual)</span>
                     </div>
                   </div>
                   

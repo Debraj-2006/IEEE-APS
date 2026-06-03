@@ -8,9 +8,7 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
   webinar: {
     title: "Webinars",
     description: "Online technical sessions and expert talks on various topics in electromagnetics and antennas.",
-    events: [
-      { id: 1, title: "Eclypse Post", date: "Coming Soon", type: "Upcoming", image: "/event/eclypse.jpeg" }
-    ]
+    events: []
   },
   workshop: {
     title: "Workshops",

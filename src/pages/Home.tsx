@@ -599,7 +599,7 @@ export function Home() {
               code="IN-WEBINAR"
               title="Webinar"
               date="ONGOING"
-              image="/event/eclypse.jpeg"
+              image="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80"
               link="/initiatives/webinar"
               index={0}
             />
@@ -607,9 +607,9 @@ export function Home() {
               status="Active"
               code="IN-WORKSHOP"
               title="Workshop"
-              subtitle="MATLAB"
+              subtitle="HANDS-ON"
               date="ONGOING"
-              image="/event/matlab.jpeg"
+              image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80"
               link="/initiatives/workshop"
               index={1}
             />
@@ -618,7 +618,7 @@ export function Home() {
               code="IN-TECHTALK"
               title="Tech Talk"
               date="ONGOING"
-              image="/event/promptx.jpeg"
+              image="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80"
               link="/initiatives/techtalk"
               index={2}
             />
@@ -627,7 +627,7 @@ export function Home() {
               code="IN-INDUSTRY"
               title="Industrial Visit"
               date="ONGOING"
-              image="/event/sytron.jpeg"
+              image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80"
               link="/initiatives/industry"
               index={3}
             />

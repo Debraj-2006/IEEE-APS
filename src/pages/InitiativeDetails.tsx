@@ -39,7 +39,11 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     events: [
       { id: 1, title: "Annual Symposium", date: "August 10, 2024", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" },
       { id: 2, title: "PromptX", date: "June 25, 2024", type: "Completed", image: "/event/promptx.jpeg" },
-      { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" }
+      { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" },
+      { id: 4, title: "Sytron - Poster 2", date: "July 15, 2024", type: "Completed", image: "/event/sytron (2).jpeg" },
+      { id: 5, title: "Sytron - Poster 3", date: "July 15, 2024", type: "Completed", image: "/event/sytron (3).jpeg" },
+      { id: 6, title: "Sytron - Poster 4", date: "July 15, 2024", type: "Completed", image: "/event/sytron (4).jpeg" },
+      { id: 7, title: "Sytron - Poster 5", date: "July 15, 2024", type: "Completed", image: "/event/sytron (5).jpeg" }
     ]
   }
 };

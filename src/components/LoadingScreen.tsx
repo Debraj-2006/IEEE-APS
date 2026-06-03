@@ -59,18 +59,22 @@ export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished
           
           {/* Radar Sweep Background */}
           <motion.div 
-            className="absolute inset-0 rounded-full border border-primary/20 bg-primary/5"
+            className="absolute inset-0 rounded-full border border-primary/20 bg-primary/5 overflow-hidden"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1 }}
           >
+            {/* The sweeping radar beam */}
             <motion.div 
-              className="absolute top-0 bottom-1/2 left-1/2 right-1/2 w-[1px] origin-bottom"
+              className="absolute inset-0 rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+              transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+              style={{
+                background: 'conic-gradient(from 0deg, transparent 70%, rgba(0, 212, 255, 0.1) 80%, rgba(0, 212, 255, 0.6) 100%)',
+              }}
             >
-              <div className="absolute bottom-0 left-0 w-[100px] h-full bg-gradient-to-r from-primary/40 to-transparent origin-bottom-left [transform:skewX(-15deg)]" style={{ filter: 'blur(2px)' }} />
-              <div className="w-full h-full bg-primary/80 shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
+              {/* The bright leading edge of the radar beam */}
+              <div className="absolute top-0 bottom-1/2 left-1/2 w-[2px] -ml-[1px] bg-primary shadow-[0_0_15px_rgba(0,212,255,1)] origin-bottom" />
             </motion.div>
             
             {/* Radar Grid Circles */}
@@ -83,22 +87,37 @@ export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished
               <div className="w-full h-[1px] bg-primary/20" />
               <div className="absolute h-full w-[1px] bg-primary/20" />
             </div>
+            
+            {/* Radar targets (blips) */}
+            <motion.div 
+              className="absolute w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(0,212,255,1)] top-1/4 left-1/3"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+            />
+            <motion.div 
+              className="absolute w-1.5 h-1.5 bg-secondary rounded-full shadow-[0_0_8px_rgba(125,194,66,1)] bottom-1/3 right-1/4"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1.8 }}
+            />
           </motion.div>
 
           {/* Radiating Waves */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="absolute w-full h-full rounded-full border-2 border-primary/50"
-                initial={{ scale: 0.2, opacity: 1 }}
-                animate={{ scale: 1.5, opacity: 0 }}
+                className="absolute w-full h-full rounded-full border-[1.5px] border-primary"
+                initial={{ scale: 0.2, opacity: 0.8 }}
+                animate={{ scale: 2.2, opacity: 0 }}
                 transition={{
-                  duration: 2.5,
+                  duration: 3,
                   repeat: Infinity,
-                  delay: i * 0.8,
+                  delay: i * 1,
                   ease: "easeOut",
                 }}
+                style={{ boxShadow: 'inset 0 0 20px rgba(0,212,255,0.1), 0 0 20px rgba(0,212,255,0.1)' }}
               />
             ))}
           </div>

@@ -617,23 +617,23 @@ export function Home() {
                 
                 <div className="relative z-20 p-8 md:p-12 max-w-3xl">
                   <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6">
-                    Webinar
+                    Special Event
                   </div>
                   <h3 className="font-headline text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
                     Eclypse
                   </h3>
                   <p className="font-body text-on-surface-variant text-lg mb-8 max-w-xl">
-                    Online technical sessions and expert talks on various topics in electromagnetics and antennas.
+                    TWO CHAPTERS. ONE VISION. INFINITE IMPACT. A collaborative initiative by IEEE IEM APS and IEEE IEM MTT-S.
                   </p>
                   
                   <div className="flex flex-wrap gap-6 mb-8">
                     <div className="flex items-center gap-2 text-on-surface">
                       <Calendar size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">Coming Soon</span>
+                      <span className="font-label text-xs uppercase tracking-widest">August 7-9, 2026</span>
                     </div>
                     <div className="flex items-center gap-2 text-on-surface">
                       <MapPin size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">Online (Virtual)</span>
+                      <span className="font-label text-xs uppercase tracking-widest">IEM Gurukul Building</span>
                     </div>
                   </div>
                   

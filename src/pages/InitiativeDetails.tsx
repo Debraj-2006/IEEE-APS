@@ -37,7 +37,6 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     title: "Special Events",
     description: "Conferences, symposiums, and other major chapter gatherings.",
     events: [
-      { id: 1, title: "Annual Symposium", date: "August 10, 2024", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" },
       { id: 2, title: "PromptX", date: "June 25, 2024", type: "Completed", image: "/event/promptx.jpeg" },
       { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" },
       { id: 4, title: "Sytron - Poster 2", date: "July 15, 2024", type: "Completed", image: "/event/sytron (2).jpeg" },

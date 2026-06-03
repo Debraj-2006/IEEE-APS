@@ -4,14 +4,14 @@ import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook } from "
 import { Link } from "react-router-dom";
 
 const NavItem = ({ href, label, active = false }: { href: string; label: string; active?: boolean }) => (
-  <a 
-    href={href} 
+  <Link 
+    to={href} 
     className={`font-label uppercase tracking-[0.2em] text-[10px] font-bold transition-colors duration-300 pb-1 border-b-2 ${
       active ? "text-primary border-primary" : "text-on-surface-variant hover:text-primary border-transparent"
     }`}
   >
     {label}
-  </a>
+  </Link>
 );
 
 const SOCIAL_LINKS = {
@@ -109,12 +109,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </div>
                 
                 <div className="flex flex-col gap-6">
-                  <a href="/#" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-primary border-b border-primary/20 pb-4">Home</a>
-                  <a href="/#about" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">About</a>
-                  <a href="/#initiatives" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Initiatives</a>
-                  <a href="/#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</a>
-                  <a href="/#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</a>
-                  <a href="/#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</a>
+                  <Link to="/#" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-primary border-b border-primary/20 pb-4">Home</Link>
+                  <Link to="/#about" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">About</Link>
+                  <Link to="/#initiatives" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Initiatives</Link>
+                  <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</Link>
+                  <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</Link>
+                  <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</Link>
                 </div>
 
                 <div className="mt-auto pb-4">
@@ -166,10 +166,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <h4 className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold mb-8">Navigation</h4>
               <div className="space-y-4">
                 {[{label: 'About', href: '/#about'}, {label: 'Initiatives', href: '/#initiatives'}, {label: 'Benefits', href: '/#benefits'}, {label: 'Team', href: '/#team'}].map(link => (
-                  <a key={link.label} href={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
+                  <Link key={link.label} to={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
                     <ChevronRight size={12} className="text-primary/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook, ExternalLink } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { CustomCursor } from "./CustomCursor";
 
@@ -75,6 +75,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
             <NavItem href="/#team" label="Team" active={isActive("/#team")} />
             <NavItem href="/#social" label="Social" active={isActive("/#social")} />
+            <a 
+              href="https://ieeeaps.org/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="font-label uppercase tracking-[0.2em] text-[10px] font-bold text-[#E2E2E5] hover:text-primary transition-colors duration-300 pb-1 border-b-2 border-transparent flex items-center gap-1 group"
+            >
+              APS Official <ExternalLink size={10} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+            </a>
           </div>
 
           <div className="flex items-center gap-6">
@@ -141,6 +149,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
                   <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
                   <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
+                  <a 
+                    href="https://ieeeaps.org/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="font-label uppercase text-xs tracking-widest border-b pb-4 text-on-surface hover:text-primary border-outline-variant/10 transition-colors flex items-center gap-1"
+                  >
+                    APS Official <ExternalLink size={12} />
+                  </a>
                 </div>
 
                 <div className="mt-auto pb-4">

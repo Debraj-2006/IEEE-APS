@@ -147,10 +147,10 @@ export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished
           transition={{ delay: 1 }}
         >
           <h2 className="font-headline text-3xl md:text-5xl font-black text-white tracking-widest uppercase" style={{ textShadow: "0 0 20px rgba(0, 212, 255, 0.4)" }}>
-            IEM IEEE AP-S
+            IEEE AP-S
           </h2>
           <p className="font-label text-xs md:text-sm text-primary uppercase tracking-[0.5em] mt-2">
-            Student Branch Chapter
+            IEM Student Branch
           </p>
         </motion.div>
 

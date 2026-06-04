@@ -26,6 +26,49 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
     if (p1) p1.position.x = 0;
     if (p2) p2.position.x = 0;
 
+    // Apply realistic materials
+    clone.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+
+        const name = mesh.name.toLowerCase();
+        const parentName = mesh.parent?.name.toLowerCase() || '';
+
+        // Extract existing color if possible to preserve it
+        let origColor = new THREE.Color('#cccccc');
+        if (mesh.material) {
+          if (Array.isArray(mesh.material)) {
+             if (mesh.material[0] && (mesh.material[0] as any).color) {
+               origColor = (mesh.material[0] as any).color;
+             }
+          } else if ((mesh.material as any).color) {
+             origColor = (mesh.material as any).color;
+          }
+        }
+
+        // Apply realistic materials
+        if (name.includes('panel') || parentName.includes('panel') || name.includes('wing') || name.includes('solar')) {
+           // Solar panels: dark blue/black, glossy, slightly metallic
+           mesh.material = new THREE.MeshStandardMaterial({
+             color: '#040d1a',
+             metalness: 0.6,
+             roughness: 0.15,
+             envMapIntensity: 2.5,
+           });
+        } else {
+           // Body: highly reflective metal, preserving original hue but making it physically metallic
+           mesh.material = new THREE.MeshStandardMaterial({
+             color: origColor,
+             metalness: 0.9,
+             roughness: 0.25,
+             envMapIntensity: 1.5,
+           });
+        }
+      }
+    });
+
     return {
       clonedScene: clone,
       panel1: p1 ?? null,
@@ -100,7 +143,7 @@ export const Antenna3D: React.FC = () => {
           <group position={isMobile ? [0, -0.4, 0] : [1.0, 0, 0]}>
             <SatelliteModel isMobile={isMobile} />
           </group>
-          <Environment preset="night" background={false} environmentIntensity={0.22} />
+          <Environment preset="city" background={false} environmentIntensity={1.0} />
         </Suspense>
 
         <OrbitControls

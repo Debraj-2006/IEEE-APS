@@ -334,7 +334,15 @@ const SOCIAL_LINKS = {
 };
 
 export function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    const hasLoaded = sessionStorage.getItem('hasLoadedBefore');
+    return !hasLoaded;
+  });
+
+  const handleLoadingFinished = () => {
+    setIsLoading(false);
+    sessionStorage.setItem('hasLoadedBefore', 'true');
+  };
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -347,7 +355,7 @@ export function Home() {
   return (
     <div className="selection:bg-primary selection:text-on-primary">
       <AnimatePresence>
-        {isLoading && <LoadingScreen onFinished={() => setIsLoading(false)} />}
+        {isLoading && <LoadingScreen onFinished={handleLoadingFinished} />}
       </AnimatePresence>
 
       {/* Hero Section */}

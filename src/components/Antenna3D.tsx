@@ -39,33 +39,40 @@ function createSolarPanelTexture() {
   return texture;
 }
 
-function createFoilBumpMap() {
+function createPanelDetailMap() {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
   const ctx = canvas.getContext('2d')!;
   
-  ctx.fillStyle = '#808080';
+  // Base aluminum color
+  ctx.fillStyle = '#e0e0e0';
   ctx.fillRect(0, 0, 512, 512);
   
-  // Draw crinkles
-  for (let i = 0; i < 4000; i++) {
-    ctx.beginPath();
-    const x = Math.random() * 512;
-    const y = Math.random() * 512;
-    ctx.moveTo(x, y);
-    const size = Math.random() * 15 + 5;
-    ctx.lineTo(x + (Math.random() - 0.5) * size, y + (Math.random() - 0.5) * size);
-    ctx.lineTo(x + (Math.random() - 0.5) * size, y + (Math.random() - 0.5) * size);
-    const c = Math.floor(100 + Math.random() * 50);
-    ctx.fillStyle = `rgb(${c}, ${c}, ${c})`;
-    ctx.fill();
+  // Panel lines
+  ctx.strokeStyle = '#a0a0a0';
+  ctx.lineWidth = 2;
+  
+  for (let i = 0; i <= 512; i += 64) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 512); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(512, i); ctx.stroke();
   }
   
+  // Rivets/details
+  ctx.fillStyle = '#909090';
+  for (let x = 0; x <= 512; x += 64) {
+    for (let y = 0; y <= 512; y += 64) {
+      ctx.beginPath(); ctx.arc(x + 4, y + 4, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 60, y + 4, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 4, y + 60, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 60, y + 60, 2, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(2, 2);
+  texture.repeat.set(2, 4);
   texture.needsUpdate = true;
   return texture;
 }
@@ -83,7 +90,7 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
   const { clonedScene, panel1, panel2, natP1X, natP2X } = useMemo(() => {
     // Generate high-detail procedural textures
     const solarTexture = createSolarPanelTexture();
-    const foilBump = createFoilBumpMap();
+    const panelDetailMap = createPanelDetailMap();
 
     const clone = originalScene.clone(true);
     const p1 = clone.getObjectByName('panel1') as THREE.Object3D | undefined;
@@ -125,26 +132,25 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
            mesh.material = new THREE.MeshStandardMaterial({
              map: solarTexture,
              color: '#ffffff',
-             metalness: 0.8,
-             roughness: 0.15,
-             envMapIntensity: 2.5,
+             metalness: 0.9,
+             roughness: 0.1,
+             envMapIntensity: 2.0,
            });
         } else if (name.includes('body') || name.includes('cylinder') || origColor.getHex() > 0x888888) {
-           // Main body: Gold/Kapton Foil with bump mapping
+           // Main body: White/Silver aerospace plating
            mesh.material = new THREE.MeshStandardMaterial({
-             color: '#e6ba35', // Aerospace gold
-             metalness: 0.85,
-             roughness: 0.35,
-             bumpMap: foilBump,
-             bumpScale: 0.02,
-             envMapIntensity: 1.5,
+             color: '#f0f4f8',
+             map: panelDetailMap,
+             metalness: 0.6,
+             roughness: 0.4,
+             envMapIntensity: 1.2,
            });
         } else {
-           // Other bits (antennas, mounts): Brushed aluminum
+           // Other bits (antennas, mounts): Darker metallic
            mesh.material = new THREE.MeshStandardMaterial({
-             color: '#b0b5b9',
-             metalness: 0.9,
-             roughness: 0.2,
+             color: '#50555a',
+             metalness: 0.8,
+             roughness: 0.3,
              envMapIntensity: 1.5,
            });
         }
@@ -215,17 +221,17 @@ export const Antenna3D: React.FC = () => {
         }}
         dpr={[1, 2]}
       >
-        <directionalLight position={[5, 7, 3]}   intensity={2.8}  color="#fff8f0" castShadow />
-        <directionalLight position={[-4, -2, -5]} intensity={0.45} color="#3a80bb" />
-        <pointLight       position={[0, -3, 2]}   intensity={0.9}  color="#00d4ff" distance={9} />
-        <ambientLight intensity={0.14} color="#080e1a" />
+        <directionalLight position={[5, 7, 3]}   intensity={3.5}  color="#ffffff" castShadow />
+        <directionalLight position={[-4, -2, -5]} intensity={1.0} color="#b0d0ff" />
+        <pointLight       position={[0, -3, 2]}   intensity={1.2}  color="#4080ff" distance={15} />
+        <ambientLight intensity={0.4} color="#101520" />
 
         <Suspense fallback={null}>
           {/* Group offset shifts the model to the right visually on desktop, centered on mobile */}
           <group position={isMobile ? [0, -0.4, 0] : [1.0, 0, 0]}>
             <SatelliteModel isMobile={isMobile} />
           </group>
-          <Environment preset="city" background={false} environmentIntensity={1.0} />
+          <Environment preset="studio" background={false} environmentIntensity={1.5} />
         </Suspense>
 
         <OrbitControls

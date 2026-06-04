@@ -284,6 +284,48 @@ const TeamMember = ({ name, role, image, badge, index = 0 }: any) => (
   </motion.div>
 );
 
+const Countdown = ({ targetDate }: { targetDate: string }) => {
+  const calculateTimeLeft = () => {
+    const difference = +new Date(targetDate) - +new Date();
+    let timeLeft: Record<string, number> = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  return (
+    <div className="flex gap-2 sm:gap-4 mt-2">
+      {Object.entries(timeLeft).map(([unit, value]) => (
+        <div key={unit} className="flex flex-col items-center justify-center glass-card p-2 sm:p-3 min-w-[60px] sm:min-w-[75px] border border-primary/30 bg-surface-container-high/40 backdrop-blur-sm shadow-[0_0_15px_rgba(0,212,255,0.1)]">
+          <span className="font-headline text-xl sm:text-2xl font-black text-primary glow-text-primary">{value}</span>
+          <span className="font-label text-[8px] sm:text-[9px] uppercase tracking-widest text-on-surface-variant/70 mt-1">{unit}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 // EDIT YOUR SOCIAL MEDIA LINKS HERE:
 const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/ieee-iem-aps-student-branch-chapter/",
@@ -606,38 +648,50 @@ export function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card relative overflow-hidden border-primary/30 group-hover:border-primary/60 transition-colors"
+                className="glass-card relative overflow-hidden border-primary/30 group-hover:border-primary/60 transition-colors p-0 flex flex-col md:flex-row"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-surface-dim via-surface-dim/80 to-transparent z-10" />
-                <img 
-                  src="/event/eclypse.jpeg" 
-                  alt="Eclypse" 
-                  className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
+                {/* Poster - Instagram post size (4:5 aspect ratio) */}
+                <div className="w-full md:w-[400px] lg:w-[480px] shrink-0 aspect-[4/5] relative overflow-hidden bg-black">
+                  <img 
+                    src="/event/eclypse.jpeg" 
+                    alt="Eclypse" 
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-90 group-hover:opacity-100"
+                  />
+                  {/* Mobile gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-90 md:hidden" />
+                  {/* Desktop gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface-dim opacity-90 hidden md:block" />
+                </div>
                 
-                <div className="relative z-20 p-8 md:p-12 max-w-3xl">
-                  <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6">
+                {/* Content aligned to the right */}
+                <div className="relative z-20 p-8 md:p-12 flex-1 flex flex-col justify-center bg-transparent -mt-20 md:mt-0">
+                  <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6 self-start shadow-[0_0_15px_rgba(0,212,255,0.2)]">
                     Special Event
                   </div>
-                  <h3 className="font-headline text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
+                  <h3 className="font-headline text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors duration-500 text-shadow-lg">
                     Eclypse
                   </h3>
-                  <p className="font-body text-on-surface-variant text-lg mb-8 max-w-xl">
+                  <p className="font-body text-on-surface-variant md:text-on-surface-variant/90 text-base md:text-lg mb-8 max-w-xl">
                     TWO CHAPTERS. ONE VISION. INFINITE IMPACT. A collaborative initiative by IEEE IEM APS and IEEE IEM MTT-S.
                   </p>
                   
-                  <div className="flex flex-wrap gap-6 mb-8">
+                  <div className="flex flex-wrap gap-4 md:gap-6 mb-4">
                     <div className="flex items-center gap-2 text-on-surface">
                       <Calendar size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">August 7-9, 2026</span>
+                      <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">August 7, 2026</span>
                     </div>
                     <div className="flex items-center gap-2 text-on-surface">
                       <MapPin size={16} className="text-primary" />
-                      <span className="font-label text-xs uppercase tracking-widest">IEM Gurukul Building</span>
+                      <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">IEM Gurukul Building</span>
                     </div>
                   </div>
                   
-                  <div className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold group-hover:gap-4 transition-all">
+                  {/* Countdown Timer */}
+                  <div className="mb-8">
+                    <Countdown targetDate="2026-08-07T00:00:00" />
+                  </div>
+                  
+                  <div className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold group-hover:gap-4 transition-all self-start border border-primary/30 px-6 py-3 hover:bg-primary/10 backdrop-blur-sm bg-surface-dim/30">
                     View Details
                     <ArrowUpRight size={16} />
                   </div>

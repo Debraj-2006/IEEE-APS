@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NavItem = ({ href, label, active = false }: { href: string; label: string; active?: boolean }) => (
   <Link 
@@ -23,6 +23,20 @@ const SOCIAL_LINKS = {
 export function Layout({ children }: { children: React.ReactNode }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (href: string) => {
+    if (href === "/#") {
+      return location.pathname === "/" && (!location.hash || location.hash === "#");
+    }
+    if (href.startsWith("/#")) {
+      if (href === "/#initiatives" && location.pathname.startsWith("/initiatives")) {
+        return true;
+      }
+      return location.pathname === "/" && location.hash === href.replace("/", "");
+    }
+    return location.pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -48,12 +62,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           <div className="hidden md:flex gap-10 items-center">
-            <NavItem href="/#" label="Home" active />
-            <NavItem href="/#about" label="About" />
-            <NavItem href="/#initiatives" label="Initiatives" />
-            <NavItem href="/#benefits" label="Benefits" />
-            <NavItem href="/#team" label="Team" />
-            <NavItem href="/#social" label="Social" />
+            <NavItem href="/#" label="Home" active={isActive("/#")} />
+            <NavItem href="/#about" label="About" active={isActive("/#about")} />
+            <NavItem href="/#initiatives" label="Initiatives" active={isActive("/#initiatives")} />
+            <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
+            <NavItem href="/#team" label="Team" active={isActive("/#team")} />
+            <NavItem href="/#social" label="Social" active={isActive("/#social")} />
           </div>
 
           <div className="flex items-center gap-6">
@@ -109,12 +123,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </div>
                 
                 <div className="flex flex-col gap-6">
-                  <Link to="/#" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-primary border-b border-primary/20 pb-4">Home</Link>
-                  <Link to="/#about" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">About</Link>
-                  <Link to="/#initiatives" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Initiatives</Link>
-                  <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Benefits</Link>
-                  <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Team</Link>
-                  <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className="font-label uppercase text-xs tracking-widest text-on-surface hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Social</Link>
+                  <Link to="/#" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Home</Link>
+                  <Link to="/#about" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#about") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>About</Link>
+                  <Link to="/#initiatives" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#initiatives") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Initiatives</Link>
+                  <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
+                  <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
+                  <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
                 </div>
 
                 <div className="mt-auto pb-4">

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { CustomCursor } from "./CustomCursor";
 
 const NavItem = ({ href, label, active = false }: { href: string; label: string; active?: boolean }) => (
   <Link 
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen selection:bg-primary selection:text-on-primary">
+      <CustomCursor />
       {/* HUD Scanline Effect */}
       <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
         <div className="scanline" />
@@ -68,6 +70,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
             <NavItem href="/#team" label="Team" active={isActive("/#team")} />
             <NavItem href="/#social" label="Social" active={isActive("/#social")} />
+            <NavItem href="/#contact" label="Contact" active={isActive("/#contact")} />
           </div>
 
           <div className="flex items-center gap-6">
@@ -129,6 +132,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
                   <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
                   <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
+                  <Link to="/#contact" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#contact") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Contact</Link>
                 </div>
 
                 <div className="mt-auto pb-4">

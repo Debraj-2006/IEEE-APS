@@ -191,9 +191,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="border-t border-outline-variant/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[10px] font-label text-on-surface-variant/40 uppercase tracking-widest">
-              © {new Date().getFullYear()} IEEE APS IEM Student Branch Chapter.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-[10px] font-label text-on-surface-variant/40 uppercase tracking-widest text-center md:text-left">
+                © {new Date().getFullYear()} IEEE APS IEM Student Branch Chapter.
+              </p>
+              <p className="text-[10px] font-label text-on-surface-variant/40 uppercase tracking-widest text-center md:text-left">
+                An Official <a href="https://ieeeaps.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors underline decoration-primary/30 underline-offset-2">IEEE Antennas and Propagation Society</a> Website.
+              </p>
+            </div>
             <p className="text-[10px] font-label text-on-surface-variant/30 uppercase tracking-widest">
               DESIGNED FOR THE FUTURE
             </p>

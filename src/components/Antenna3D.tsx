@@ -3,6 +3,73 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, Environment, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
+/* ─── Procedural Texture Generators ─── */
+function createSolarPanelTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d')!;
+  
+  // Base color (deep blue/black)
+  ctx.fillStyle = '#020813';
+  ctx.fillRect(0, 0, 512, 512);
+  
+  // Grid lines
+  ctx.strokeStyle = '#2a4a7f';
+  ctx.lineWidth = 4;
+  
+  for (let i = 0; i <= 512; i += 64) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 512); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(512, i); ctx.stroke();
+  }
+  
+  // Subtle highlights to make cells pop
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+  for (let x = 0; x < 512; x += 64) {
+    for (let y = 0; y < 512; y += 64) {
+      if (Math.random() > 0.4) ctx.fillRect(x + 2, y + 2, 60, 60);
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 1);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function createFoilBumpMap() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d')!;
+  
+  ctx.fillStyle = '#808080';
+  ctx.fillRect(0, 0, 512, 512);
+  
+  // Draw crinkles
+  for (let i = 0; i < 4000; i++) {
+    ctx.beginPath();
+    const x = Math.random() * 512;
+    const y = Math.random() * 512;
+    ctx.moveTo(x, y);
+    const size = Math.random() * 15 + 5;
+    ctx.lineTo(x + (Math.random() - 0.5) * size, y + (Math.random() - 0.5) * size);
+    ctx.lineTo(x + (Math.random() - 0.5) * size, y + (Math.random() - 0.5) * size);
+    const c = Math.floor(100 + Math.random() * 50);
+    ctx.fillStyle = `rgb(${c}, ${c}, ${c})`;
+    ctx.fill();
+  }
+  
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(2, 2);
+  texture.needsUpdate = true;
+  return texture;
+}
+
 /* ─── Main satellite mesh + animation ─── */
 function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
   const { scene: originalScene } = useGLTF('/satellite.glb');
@@ -14,6 +81,10 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
   // can fire — eliminating the race condition that caused the one-wing bug.
   // The original cached scene is never mutated.
   const { clonedScene, panel1, panel2, natP1X, natP2X } = useMemo(() => {
+    // Generate high-detail procedural textures
+    const solarTexture = createSolarPanelTexture();
+    const foilBump = createFoilBumpMap();
+
     const clone = originalScene.clone(true);
     const p1 = clone.getObjectByName('panel1') as THREE.Object3D | undefined;
     const p2 = clone.getObjectByName('panel2') as THREE.Object3D | undefined;
@@ -50,19 +121,30 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
 
         // Apply realistic materials
         if (name.includes('panel') || parentName.includes('panel') || name.includes('wing') || name.includes('solar')) {
-           // Solar panels: dark blue/black, glossy, slightly metallic
+           // Solar panels: detailed grid, highly glossy
            mesh.material = new THREE.MeshStandardMaterial({
-             color: '#040d1a',
-             metalness: 0.6,
+             map: solarTexture,
+             color: '#ffffff',
+             metalness: 0.8,
              roughness: 0.15,
              envMapIntensity: 2.5,
            });
-        } else {
-           // Body: highly reflective metal, preserving original hue but making it physically metallic
+        } else if (name.includes('body') || name.includes('cylinder') || origColor.getHex() > 0x888888) {
+           // Main body: Gold/Kapton Foil with bump mapping
            mesh.material = new THREE.MeshStandardMaterial({
-             color: origColor,
+             color: '#e6ba35', // Aerospace gold
+             metalness: 0.85,
+             roughness: 0.35,
+             bumpMap: foilBump,
+             bumpScale: 0.02,
+             envMapIntensity: 1.5,
+           });
+        } else {
+           // Other bits (antennas, mounts): Brushed aluminum
+           mesh.material = new THREE.MeshStandardMaterial({
+             color: '#b0b5b9',
              metalness: 0.9,
-             roughness: 0.25,
+             roughness: 0.2,
              envMapIntensity: 1.5,
            });
         }

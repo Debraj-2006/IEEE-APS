@@ -59,9 +59,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         isScrolled ? "bg-surface-dim/95 backdrop-blur-md border-primary/20 py-4" : "bg-transparent border-transparent py-6"
       }`}>
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-black tracking-tighter text-primary glow-text-primary font-headline cursor-pointer">
-            IEEE APS <span className="text-white">IEM</span>
-          </Link>
+          <div className="flex flex-col">
+            <Link to="/" className="text-2xl font-black tracking-tighter text-primary glow-text-primary font-headline cursor-pointer">
+              IEEE APS <span className="text-white">IEM</span>
+            </Link>
+            <span className="hidden lg:block text-[8px] font-label uppercase tracking-widest text-on-surface-variant/60 mt-1 max-w-[200px] leading-tight">
+              An Official IEEE Antennas and Propagation Society Website.
+            </span>
+          </div>
 
           <div className="hidden md:flex gap-10 items-center">
             <NavItem href="/#" label="Home" active={isActive("/#")} />
@@ -70,7 +75,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
             <NavItem href="/#team" label="Team" active={isActive("/#team")} />
             <NavItem href="/#social" label="Social" active={isActive("/#social")} />
-            <NavItem href="/#contact" label="Contact" active={isActive("/#contact")} />
           </div>
 
           <div className="flex items-center gap-6">
@@ -114,8 +118,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 className="md:hidden fixed top-0 right-0 w-[80%] max-w-sm h-screen bg-surface border-l border-primary/20 p-8 flex flex-col gap-8 z-[100] shadow-2xl"
               >
                 <div className="flex justify-between items-center mb-4">
-                  <div className="text-xl font-black tracking-tighter text-primary font-headline">
-                    APS <span className="text-white">IEM</span>
+                  <div className="flex flex-col">
+                    <div className="text-xl font-black tracking-tighter text-primary font-headline">
+                      APS <span className="text-white">IEM</span>
+                    </div>
+                    <span className="text-[8px] font-label uppercase tracking-widest text-on-surface-variant/60 mt-1 max-w-[180px] leading-tight">
+                      An Official IEEE Antennas and Propagation Society Website.
+                    </span>
                   </div>
                   <button 
                     onClick={() => setMobileMenuOpen(false)}
@@ -132,7 +141,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
                   <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
                   <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
-                  <Link to="/#contact" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#contact") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Contact</Link>
                 </div>
 
                 <div className="mt-auto pb-4">

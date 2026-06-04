@@ -34,7 +34,7 @@ import { useState, useEffect, useRef } from "react";
 import { Antenna3D } from "../components/Antenna3D";
 import { TeamSection } from "../components/TeamSection";
 import { LoadingScreen } from "../components/LoadingScreen";
-import { ContactForm } from "../components/ContactForm";
+
 
 const TerminalText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   const [displayText, setDisplayText] = useState("");
@@ -960,8 +960,6 @@ export function Home() {
       </section>
 
 
-      {/* ─── Contact Form Section ─── */}
-      <ContactForm />
 
 
       {/* Floating PDF Button */}

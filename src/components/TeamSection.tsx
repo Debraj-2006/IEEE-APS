@@ -231,7 +231,7 @@ const MEMBERS = [
     ],
     certifications: [],
     email: "ddebraj496@gmail.com",
-    linkedin: "https://www.linkedin.com/in/debraj-debnath-b28a3a30a",
+    linkedin: "https://www.linkedin.com/in/debraj-debnath-b28a3a30a?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   },
 ];
 

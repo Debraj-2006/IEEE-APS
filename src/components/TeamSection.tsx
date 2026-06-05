@@ -310,22 +310,28 @@ const MemberModal = ({ member, onClose }: { member: typeof MEMBERS[0]; onClose: 
               <p className="font-label text-sm text-primary uppercase tracking-widest mb-4">{member.role}</p>
 
               {/* Social links */}
-              <div className="flex gap-3">
-                {member.linkedin && (
-                  <a href={member.linkedin} target={member.linkedin !== "#" ? "_blank" : "_self"} rel="noopener noreferrer"
-                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all cursor-pointer">
+              <div className="flex gap-3 relative z-20">
+                {member.linkedin && member.linkedin !== "#" && (
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer"
+                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Linkedin size={14} />
                   </a>
                 )}
                 {(member as any).github && (
                   <a href={`https://github.com/${(member as any).github}`} target="_blank" rel="noopener noreferrer"
-                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all">
+                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Github size={14} />
                   </a>
                 )}
                 {member.email && (
                   <a href={`mailto:${member.email}`}
-                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all">
+                    className="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-on-surface-variant/50 hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Mail size={14} />
                   </a>
                 )}
@@ -468,14 +474,17 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
             )}
 
             {/* LinkedIn icon */}
-            <div className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center bg-surface-dim/60 backdrop-blur-sm border border-outline-variant/20 text-on-surface-variant/50 group-hover:text-primary group-hover:border-primary/30 transition-all opacity-0 group-hover:opacity-100"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (member.linkedin && member.linkedin !== "#") window.open(member.linkedin, "_blank");
-              }}
-            >
-              <Linkedin size={12} />
-            </div>
+            {member.linkedin && member.linkedin !== "#" && (
+              <a 
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center bg-surface-dim/60 backdrop-blur-sm border border-outline-variant/20 text-on-surface-variant/50 group-hover:text-primary group-hover:border-primary/30 transition-all opacity-0 group-hover:opacity-100 z-10"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Linkedin size={12} />
+              </a>
+            )}
           </div>
 
           {/* Info */}

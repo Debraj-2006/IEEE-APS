@@ -138,8 +138,8 @@ const MEMBERS = [
     publications: ["Multiple accepted research papers — IEEE WAMS 2026 (antenna & sensing systems)"],
     experience: ["IEEE Member", "Event Organizing"],
     certifications: [],
-    email: "shrijitalo5@gmail.com",
-    linkedin: "https://www.linkedin.com/in/shrijita-lo",
+    email: "Shrijitalo5@gmail.com",
+    linkedin: "https://www.linkedin.com/in/shrijita-lo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
   /* ── Core Committee ── */

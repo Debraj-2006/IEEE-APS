@@ -73,6 +73,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavItem href="/#about" label="About" active={isActive("/#about")} />
             <NavItem href="/#initiatives" label="Initiatives" active={isActive("/#initiatives")} />
             <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
+            <NavItem href="/#gallery" label="Gallery" active={isActive("/#gallery")} />
             <NavItem href="/#team" label="Team" active={isActive("/#team")} />
             <NavItem href="/#social" label="Social" active={isActive("/#social")} />
             <a 
@@ -147,6 +148,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Link to="/#about" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#about") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>About</Link>
                   <Link to="/#initiatives" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#initiatives") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Initiatives</Link>
                   <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
+                  <Link to="/#gallery" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#gallery") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Gallery</Link>
                   <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
                   <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
                   <a 
@@ -207,7 +209,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold mb-8">Navigation</h4>
               <div className="space-y-4">
-                {[{label: 'About', href: '/#about'}, {label: 'Initiatives', href: '/#initiatives'}, {label: 'Benefits', href: '/#benefits'}, {label: 'Team', href: '/#team'}].map(link => (
+                {[{label: 'About', href: '/#about'}, {label: 'Initiatives', href: '/#initiatives'}, {label: 'Benefits', href: '/#benefits'}, {label: 'Gallery', href: '/#gallery'}, {label: 'Team', href: '/#team'}].map(link => (
                   <Link key={link.label} to={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
                     <ChevronRight size={12} className="text-primary/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     {link.label}

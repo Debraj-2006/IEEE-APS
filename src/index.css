@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap');
 @import "tailwindcss";
 
-@theme {
+@theme {  
   --font-headline: "Inter", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
   --font-label: "Space Grotesk", sans-serif;

@@ -23,19 +23,34 @@ import {
 const MEMBERS = [
   /* ── Faculty Adviser ── */
   {
-    name: "Srijita Chakraborty",
+    name: "Dr. Srijita Chakraborty",
     role: "Faculty Adviser",
     committee: "Faculty Adviser",
     image: "/picture/adviser.jpeg",
     badge: "Faculty Adviser",
-    about: "Faculty adviser guiding IEEE APS IEM Student Branch Chapter with expertise and strategic direction.",
-    skills: [],
-    projects: [],
-    publications: [],
-    experience: [],
+    about: "Associate Professor in the Department of ECE at IEM Kolkata with 12+ years of academic experience. PhD holder specializing in microstrip antennas, RF & microwave engineering, UWB technology, and SIW structures. Gold Medalist & GATE Scholar. Faculty Adviser of IEEE APS IEM Student Branch Chapter.",
+    skills: ["Microstrip Antennas", "RF & Microwave Engineering", "UWB Technology", "SIW Structures", "CST Microwave Studio", "MATLAB", "Antenna Design", "DGS Integration"],
+    projects: [
+      "Dielectric Resonator Integrated High Gain SIW Antenna Array",
+      "Wearable DGS-Integrated Antenna Design",
+      "CPW-Fed UWB Antenna with Notch-Band Characteristics",
+      "Band-Pass FSS Based on SIW Technology",
+    ],
+    publications: [
+      "Multiple IEEE & international journal publications on microstrip antenna design",
+      "Research on higher-order mode suppression in rectangular & wearable antennas",
+      "Studies on compact antenna miniaturization & bandwidth enhancement",
+    ],
+    experience: [
+      "Associate Professor — IEM Kolkata (ECE Dept.)",
+      "Assistant HOD — ECE Department, IEM",
+      "IEEE Member — AP-S, MTT-S, WIE, SIGHT",
+      "PhD — Maulana Abul Kalam Azad University of Technology",
+      "Gold Medalist & GATE Scholar — Kalyani Govt. Engineering College",
+    ],
     certifications: [],
     email: "",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/srijita-chakraborty-7b1208320",
   },
   /* ── Executive Committee ── */
   {

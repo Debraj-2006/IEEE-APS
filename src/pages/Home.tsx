@@ -34,6 +34,8 @@ import { useState, useEffect, useRef } from "react";
 import { Antenna3D } from "../components/Antenna3D";
 import { TeamSection } from "../components/TeamSection";
 import { LoadingScreen } from "../components/LoadingScreen";
+import { GallerySection } from "../components/GallerySection";
+
 
 
 const TerminalText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -808,6 +810,10 @@ export function Home() {
 
       {/* Team Section */}
       <TeamSection />
+
+      {/* Gallery Section */}
+      <GallerySection />
+
 
       {/* Social Hub Section */}
       <section id="social" className="py-32 px-8 bg-surface-dim relative overflow-hidden">

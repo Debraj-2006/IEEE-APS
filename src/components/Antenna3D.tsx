@@ -11,7 +11,7 @@ function createSolarPanelTexture() {
   const ctx = canvas.getContext('2d')!;
   
   // Base color (deep blue/black)
-  ctx.fillStyle = '#020813';
+  ctx.fillStyle = '#000000ff';
   ctx.fillRect(0, 0, 512, 512);
   
   // Grid lines

@@ -35,10 +35,10 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     events: [
       { id: 2, title: "PromptX", date: "June 25, 2024", type: "Completed", image: "/event/promptx.jpeg" },
       { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" },
-      { id: 4, title: "Sytron - Game Day", date: "July 15, 2024", type: "Completed", image: "/event/GAME DAY.jpeg" },
-      { id: 5, title: "Sytron - FF Tournament", date: "July 15, 2024", type: "Completed", image: "/event/FF TOURNAMENT.jpeg" },
-      { id: 6, title: "Sytron - Robotics", date: "July 15, 2024", type: "Completed", image: "/event/ROBOTICS.jpeg" },
-      { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/ROBO SOCCER.jpeg" }
+      { id: 4, title: "Sytron - Game Day", date: "July 15, 2024", type: "Completed", image: "/event/game-day.jpeg" },
+      { id: 5, title: "Sytron - FF Tournament", date: "July 15, 2024", type: "Completed", image: "/event/ff-tournament.jpeg" },
+      { id: 6, title: "Sytron - Robotics", date: "July 15, 2024", type: "Completed", image: "/event/robotics.jpeg" },
+      { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/robo-soccer.jpeg" }
     ]
   }
 };

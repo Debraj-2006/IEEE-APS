@@ -27,9 +27,7 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
   industry: {
     title: "Industrial Visits",
     description: "Field trips to leading technology companies and research facilities.",
-    events: [
-      { id: 1, title: "Sytron Visit", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" }
-    ]
+    events: []
   },
   event: {
     title: "Special Events",
@@ -37,10 +35,10 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     events: [
       { id: 2, title: "PromptX", date: "June 25, 2024", type: "Completed", image: "/event/promptx.jpeg" },
       { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" },
-      { id: 4, title: "Sytron - Poster 2", date: "July 15, 2024", type: "Completed", image: "/event/sytron (2).jpeg" },
-      { id: 5, title: "Sytron - Poster 3", date: "July 15, 2024", type: "Completed", image: "/event/sytron (3).jpeg" },
-      { id: 6, title: "Sytron - Poster 4", date: "July 15, 2024", type: "Completed", image: "/event/sytron (4).jpeg" },
-      { id: 7, title: "Sytron - Poster 5", date: "July 15, 2024", type: "Completed", image: "/event/sytron (5).jpeg" }
+      { id: 4, title: "Sytron - Game Day", date: "July 15, 2024", type: "Completed", image: "/event/GAME DAY.jpeg" },
+      { id: 5, title: "Sytron - FF Tournament", date: "July 15, 2024", type: "Completed", image: "/event/FF TOURNAMENT.jpeg" },
+      { id: 6, title: "Sytron - Robotics", date: "July 15, 2024", type: "Completed", image: "/event/ROBOTICS.jpeg" },
+      { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/ROBO SOCCER.jpeg" }
     ]
   }
 };

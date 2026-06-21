@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { ChevronLeft, Calendar, MapPin, ArrowUpRight } from "lucide-react";
 
 // Mock data for the specific events in each category
-const CATEGORY_DATA: Record<string, { title: string, description: string, events: any[] }> = {
+const CATEGORY_DATA: Record<string, { title: string, description: string, events?: any[], subCategories?: { title: string, events: any[] }[] }> = {
   webinar: {
     title: "Webinars",
     description: "Online technical sessions and expert talks on various topics in electromagnetics and antennas.",
@@ -41,20 +41,24 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
       { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/robo-soccer.jpeg" }
     ]
   },
-  "aps-domain-conference": {
-    title: "APS Domain Conferences",
-    description: "Major academic and industry conferences in the Antennas and Propagation domain.",
-    events: [
-      { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India", endDate: "2026-12-19" },
-      { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India", endDate: "2027-03-18" },
-      { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA", endDate: "2026-07-18" },
-      { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA", endDate: "2026-10-23" }
+  conference: {
+    title: "Conferences",
+    description: "Major academic and industry conferences.",
+    subCategories: [
+      {
+        title: "APS Domain Conferences",
+        events: [
+          { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India", endDate: "2026-12-19" },
+          { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India", endDate: "2027-03-18" },
+          { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA", endDate: "2026-07-18" },
+          { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA", endDate: "2026-10-23" }
+        ]
+      },
+      {
+        title: "Interdisciplinary Conferences",
+        events: []
+      }
     ]
-  },
-  "interdisciplinary-conference": {
-    title: "Interdisciplinary Conferences",
-    description: "Major academic and industry conferences across interdisciplinary domains.",
-    events: []
   }
 };
 
@@ -67,6 +71,73 @@ export function InitiativeDetails() {
   
   // Fallback if category not found
   const data = type && CATEGORY_DATA[type] ? CATEGORY_DATA[type] : { title: "Initiative", description: "Details about this initiative.", events: [] };
+
+  const renderEventsGrid = (events: any[]) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {events.filter(event => !event.endDate || new Date(event.endDate) >= new Date()).map((event, i) => {
+        const CardWrapper = event.link ? motion.a : motion.div;
+        const linkProps = event.link ? { href: event.link, target: "_blank", rel: "noopener noreferrer" } : {};
+        return (
+          <CardWrapper 
+            {...linkProps}
+            key={event.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: i * 0.1 }}
+            className="glass-card overflow-hidden group cursor-pointer flex flex-col"
+          >
+            <div className="relative h-48 overflow-hidden shrink-0">
+              <img 
+                src={event.image} 
+                alt={event.title} 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              />
+              <div className="absolute top-4 left-4 flex gap-2">
+                <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-widest ${event.type === 'Upcoming' ? 'bg-primary text-on-primary' : 'bg-surface/80 text-on-surface backdrop-blur-md'}`}>
+                  {event.type}
+                </span>
+              </div>
+              {event.link && (
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowUpRight size={14} className="text-on-surface" />
+                </div>
+              )}
+            </div>
+            <div className="p-6 flex flex-col flex-1">
+              <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4 line-clamp-2">
+                {event.title}
+              </h3>
+              <div className="mt-auto flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                  <Calendar size={12} className="shrink-0 text-primary/60" />
+                  <span className="truncate">{event.date}</span>
+                </div>
+                {event.location && (
+                  <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                    <MapPin size={12} className="shrink-0 text-primary/60" />
+                    <span className="truncate">{event.location}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </CardWrapper>
+        );
+      })}
+      
+      {/* Empty state / placeholder for adding more */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="border border-dashed border-outline-variant/30 flex flex-col items-center justify-center p-12 text-center group hover:border-primary/50 transition-colors cursor-pointer min-h-[300px]"
+      >
+        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-4">
+          <ArrowUpRight size={20} />
+        </div>
+        <h4 className="font-headline font-bold uppercase text-on-surface tracking-tight">More Coming Soon</h4>
+        <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 mt-2">Stay Tuned</p>
+      </motion.div>
+    </div>
+  );
 
   return (
     <div className="pt-32 pb-20 px-8 min-h-screen bg-surface-dim">
@@ -94,70 +165,18 @@ export function InitiativeDetails() {
 
         <div className="h-[1px] w-full bg-outline-variant/20 mb-16" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.events.filter(event => !event.endDate || new Date(event.endDate) >= new Date()).map((event, i) => {
-            const CardWrapper = event.link ? motion.a : motion.div;
-            const linkProps = event.link ? { href: event.link, target: "_blank", rel: "noopener noreferrer" } : {};
-            return (
-              <CardWrapper 
-                {...linkProps}
-                key={event.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card overflow-hidden group cursor-pointer flex flex-col"
-              >
-                <div className="relative h-48 overflow-hidden shrink-0">
-                  <img 
-                    src={event.image} 
-                    alt={event.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                  />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-widest ${event.type === 'Upcoming' ? 'bg-primary text-on-primary' : 'bg-surface/80 text-on-surface backdrop-blur-md'}`}>
-                      {event.type}
-                    </span>
-                  </div>
-                  {event.link && (
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight size={14} className="text-on-surface" />
-                    </div>
-                  )}
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4 line-clamp-2">
-                    {event.title}
-                  </h3>
-                  <div className="mt-auto flex flex-col gap-2">
-                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                      <Calendar size={12} className="shrink-0 text-primary/60" />
-                      <span className="truncate">{event.date}</span>
-                    </div>
-                    {event.location && (
-                      <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                        <MapPin size={12} className="shrink-0 text-primary/60" />
-                        <span className="truncate">{event.location}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </CardWrapper>
-            );
-          })}
-          
-          {/* Empty state / placeholder for adding more */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="border border-dashed border-outline-variant/30 flex flex-col items-center justify-center p-12 text-center group hover:border-primary/50 transition-colors cursor-pointer min-h-[300px]"
-          >
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-4">
-              <ArrowUpRight size={20} />
-            </div>
-            <h4 className="font-headline font-bold uppercase text-on-surface tracking-tight">More Coming Soon</h4>
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 mt-2">Stay Tuned</p>
-          </motion.div>
-        </div>
+        {data.subCategories ? (
+          <div className="flex flex-col gap-16">
+            {data.subCategories.map((sub, idx) => (
+              <div key={idx}>
+                <h2 className="font-headline text-2xl md:text-3xl font-bold uppercase mb-8 text-on-surface border-l-4 border-primary pl-4">{sub.title}</h2>
+                {renderEventsGrid(sub.events)}
+              </div>
+            ))}
+          </div>
+        ) : (
+          renderEventsGrid(data.events || [])
+        )}
       </div>
     </div>
   );

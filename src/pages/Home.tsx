@@ -763,21 +763,12 @@ export function Home() {
             />
             <EventCard 
               status="Active"
-              code="IN-APS-CONF"
-              title="APS Domain Conferences"
+              code="IN-CONFERENCE"
+              title="Conference"
               date="UPCOMING"
               image="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80"
-              link="/initiatives/aps-domain-conference"
+              link="/initiatives/conference"
               index={5}
-            />
-            <EventCard 
-              status="Active"
-              code="IN-INT-CONF"
-              title="Interdisciplinary Conferences"
-              date="COMING SOON"
-              image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80"
-              link="/initiatives/interdisciplinary-conference"
-              index={6}
             />
           </div>
         </div>

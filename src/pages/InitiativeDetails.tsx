@@ -43,8 +43,13 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
   },
   conference: {
     title: "Upcoming Conferences",
-    description: "Major academic and industry conferences hosted by the chapter.",
-    events: []
+    description: "Major academic and industry conferences.",
+    events: [
+      { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India" },
+      { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India" },
+      { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA" },
+      { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA" }
+    ]
   }
 };
 
@@ -85,37 +90,55 @@ export function InitiativeDetails() {
         <div className="h-[1px] w-full bg-outline-variant/20 mb-16" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.events.map((event, i) => (
-            <motion.div 
-              key={event.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-card overflow-hidden group cursor-pointer"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={event.image} 
-                  alt={event.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                />
-                <div className="absolute top-4 left-4">
-                  <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-widest ${event.type === 'Upcoming' ? 'bg-primary text-on-primary' : 'bg-surface/80 text-on-surface backdrop-blur-md'}`}>
-                    {event.type}
-                  </span>
+          {data.events.map((event, i) => {
+            const CardWrapper = event.link ? motion.a : motion.div;
+            const linkProps = event.link ? { href: event.link, target: "_blank", rel: "noopener noreferrer" } : {};
+            return (
+              <CardWrapper 
+                {...linkProps}
+                key={event.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card overflow-hidden group cursor-pointer flex flex-col"
+              >
+                <div className="relative h-48 overflow-hidden shrink-0">
+                  <img 
+                    src={event.image} 
+                    alt={event.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                  />
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-widest ${event.type === 'Upcoming' ? 'bg-primary text-on-primary' : 'bg-surface/80 text-on-surface backdrop-blur-md'}`}>
+                      {event.type}
+                    </span>
+                  </div>
+                  {event.link && (
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight size={14} className="text-on-surface" />
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4">
-                  {event.title}
-                </h3>
-                <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                  <Calendar size={12} />
-                  <span>{event.date}</span>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4 line-clamp-2">
+                    {event.title}
+                  </h3>
+                  <div className="mt-auto flex flex-col gap-2">
+                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                      <Calendar size={12} className="shrink-0 text-primary/60" />
+                      <span className="truncate">{event.date}</span>
+                    </div>
+                    {event.location && (
+                      <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                        <MapPin size={12} className="shrink-0 text-primary/60" />
+                        <span className="truncate">{event.location}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </CardWrapper>
+            );
+          })}
           
           {/* Empty state / placeholder for adding more */}
           <motion.div 

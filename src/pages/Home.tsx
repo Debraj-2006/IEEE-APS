@@ -761,15 +761,7 @@ export function Home() {
               link="/initiatives/event"
               index={4}
             />
-            <EventCard 
-              status="Active"
-              code="IN-CONFERENCE"
-              title="Conference"
-              date="UPCOMING"
-              image="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80"
-              link="/initiatives/conference"
-              index={5}
-            />
+
           </div>
         </div>
       </section>

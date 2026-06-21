@@ -28,7 +28,8 @@ import {
   FileText,
   Linkedin,
   Instagram,
-  Facebook
+  Facebook,
+  Globe
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Antenna3D } from "../components/Antenna3D";
@@ -762,6 +763,81 @@ export function Home() {
               index={4}
             />
 
+          </div>
+        </div>
+      </section>
+
+      {/* Conferences Section */}
+      <section id="conferences" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.05)_0%,transparent_50%)]" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
+              <Globe size={16} className="text-primary" />
+              <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
+            </div>
+            <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Conferences</h2>
+            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">Global Reach and Networking</p>
+            <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
+          </div>
+
+          <div className="mb-12 border-l-4 border-primary pl-4">
+            <h3 className="text-2xl font-headline font-bold text-white uppercase tracking-wider">APS Domain Conferences</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+            {[
+              { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, India" },
+              { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, India" },
+              { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, USA" },
+              { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA" }
+            ].map((event, index) => (
+              <motion.a 
+                key={event.id}
+                href={event.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="glass-card overflow-hidden group cursor-pointer flex flex-col h-full"
+              >
+                <div className="relative h-48 overflow-hidden shrink-0">
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="bg-primary text-on-primary px-2 py-1 text-[9px] font-bold uppercase tracking-widest">{event.type}</span>
+                  </div>
+                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight size={14} className="text-on-surface" />
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4 line-clamp-2">{event.title}</h3>
+                  <div className="mt-auto flex flex-col gap-2">
+                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                      <Calendar size={12} className="shrink-0 text-primary/60" />
+                      <span className="truncate">{event.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                      <MapPin size={12} className="shrink-0 text-primary/60" />
+                      <span className="truncate">{event.location}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="mb-12 border-l-4 border-primary pl-4">
+            <h3 className="text-2xl font-headline font-bold text-white uppercase tracking-wider">Interdisciplinary Conferences</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="col-span-full py-12 text-center border-2 border-dashed border-outline-variant/20 bg-surface/30 backdrop-blur-sm rounded-lg">
+              <Calendar className="mx-auto h-8 w-8 text-on-surface-variant/40 mb-3" />
+              <p className="text-on-surface-variant/70 font-label uppercase tracking-widest text-xs">No events scheduled currently.</p>
+            </div>
           </div>
         </div>
       </section>

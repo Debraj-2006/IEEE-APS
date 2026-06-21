@@ -41,15 +41,20 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
       { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/robo-soccer.jpeg" }
     ]
   },
-  conference: {
-    title: "Upcoming Conferences",
-    description: "Major academic and industry conferences.",
+  "aps-domain-conference": {
+    title: "APS Domain Conferences",
+    description: "Major academic and industry conferences in the Antennas and Propagation domain.",
     events: [
       { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India", endDate: "2026-12-19" },
       { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India", endDate: "2027-03-18" },
       { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA", endDate: "2026-07-18" },
       { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA", endDate: "2026-10-23" }
     ]
+  },
+  "interdisciplinary-conference": {
+    title: "Interdisciplinary Conferences",
+    description: "Major academic and industry conferences across interdisciplinary domains.",
+    events: []
   }
 };
 

@@ -45,10 +45,10 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     title: "Upcoming Conferences",
     description: "Major academic and industry conferences.",
     events: [
-      { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India" },
-      { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India" },
-      { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA" },
-      { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA" }
+      { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, Maharashtra, India", endDate: "2026-12-19" },
+      { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, Telangana, India", endDate: "2027-03-18" },
+      { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, Michigan, USA", endDate: "2026-07-18" },
+      { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA", endDate: "2026-10-23" }
     ]
   }
 };
@@ -90,7 +90,7 @@ export function InitiativeDetails() {
         <div className="h-[1px] w-full bg-outline-variant/20 mb-16" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.events.map((event, i) => {
+          {data.events.filter(event => !event.endDate || new Date(event.endDate) >= new Date()).map((event, i) => {
             const CardWrapper = event.link ? motion.a : motion.div;
             const linkProps = event.link ? { href: event.link, target: "_blank", rel: "noopener noreferrer" } : {};
             return (

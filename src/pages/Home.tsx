@@ -714,7 +714,7 @@ export function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <EventCard 
               status="Active"
               code="IN-WEBINAR"
@@ -760,6 +760,15 @@ export function Home() {
               image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80"
               link="/initiatives/event"
               index={4}
+            />
+            <EventCard 
+              status="Active"
+              code="IN-CONFERENCE"
+              title="Conference"
+              date="UPCOMING"
+              image="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80"
+              link="/initiatives/conference"
+              index={5}
             />
           </div>
         </div>

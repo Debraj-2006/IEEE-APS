@@ -40,6 +40,11 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
       { id: 6, title: "Sytron - Robotics", date: "July 15, 2024", type: "Completed", image: "/event/robotics.jpeg" },
       { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/robo-soccer.jpeg" }
     ]
+  },
+  conference: {
+    title: "Upcoming Conferences",
+    description: "Major academic and industry conferences hosted by the chapter.",
+    events: []
   }
 };
 

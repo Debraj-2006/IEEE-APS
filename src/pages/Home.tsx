@@ -655,64 +655,85 @@ export function Home() {
               <span className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold">Upcoming Deployment</span>
             </div>
             
-            <Link to="/initiatives/event" className="block group">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass-card relative overflow-hidden border-primary/30 group-hover:border-primary/60 transition-colors p-0 flex flex-col md:flex-row"
-              >
-                {/* Poster - Instagram post size (4:5 aspect ratio) */}
-                <div className="w-full md:w-[400px] lg:w-[480px] shrink-0 aspect-[4/5] relative overflow-hidden bg-black">
-                  <img 
-                    src="/event/eclypse.jpeg" 
-                    alt="Eclypse" 
-                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-90 group-hover:opacity-100"
-                  />
-                  {/* Mobile gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-90 md:hidden" />
-                  {/* Desktop gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface-dim opacity-90 hidden md:block" />
-                </div>
-                
-                {/* Content aligned to the right */}
-                <div className="relative z-20 p-8 md:p-12 flex-1 flex flex-col justify-center bg-transparent -mt-20 md:mt-0">
-                  <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest mb-6 self-start shadow-[0_0_15px_rgba(0,212,255,0.2)]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="glass-card group relative overflow-hidden border-primary/30 hover:border-primary/60 transition-colors p-0 flex flex-col md:flex-row"
+            >
+              {/* Poster - Instagram post size (4:5 aspect ratio) */}
+              <div className="w-full md:w-[400px] lg:w-[480px] shrink-0 aspect-[4/5] relative overflow-hidden bg-black">
+                <img
+                  src="/event/eclypse.jpeg"
+                  alt="Eclypse"
+                  className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-90 group-hover:opacity-100"
+                />
+                {/* Mobile gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-90 md:hidden" />
+                {/* Desktop gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface-dim opacity-90 hidden md:block" />
+              </div>
+
+              {/* Content aligned to the right */}
+              <div className="relative z-20 p-8 md:p-12 flex-1 flex flex-col justify-center bg-transparent -mt-20 md:mt-0">
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(0,212,255,0.2)]">
                     Special Event
                   </div>
-                  <h3 className="font-headline text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors duration-500 text-shadow-lg">
-                    Eclypse
-                  </h3>
-                  <p className="font-body text-on-surface-variant md:text-on-surface-variant/90 text-base md:text-lg mb-8 max-w-xl">
-                    TWO CHAPTERS. ONE VISION. INFINITE IMPACT. A collaborative initiative by IEEE IEM APS and IEEE IEM MTT-S.
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-4 md:gap-6 mb-4">
-                    <div className="flex items-center gap-2 text-on-surface">
-                      <Calendar size={16} className="text-primary" />
-                      <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">August 7, 2026</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface">
-                      <MapPin size={16} className="text-primary" />
-                      <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">IEM Gurukul Building</span>
-                    </div>
-                  </div>
-                  
-                  {/* Countdown Timer */}
-                  <div className="mb-8">
-                    <Countdown targetDate="2026-08-07T00:00:00" />
-                  </div>
-                  
-                  <div className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold group-hover:gap-4 transition-all self-start border border-primary/30 px-6 py-3 hover:bg-primary/10 backdrop-blur-sm bg-surface-dim/30">
-                    View Details
-                    <ArrowUpRight size={16} />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/15 backdrop-blur-md border border-green-500/40 text-green-400 font-label text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_6px_rgba(34,197,94,0.8)]" />
+                    Registration Open
                   </div>
                 </div>
-                
-                {/* Scan line effect */}
-                <div className="card-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
-              </motion.div>
-            </Link>
+                <h3 className="font-headline text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors duration-500 text-shadow-lg">
+                  Eclypse
+                </h3>
+                <p className="font-body text-on-surface-variant md:text-on-surface-variant/90 text-base md:text-lg mb-8 max-w-xl">
+                  TWO CHAPTERS. ONE VISION. INFINITE IMPACT. A collaborative initiative by IEEE IEM APS and IEEE IEM MTT-S.
+                </p>
+
+                <div className="flex flex-wrap gap-4 md:gap-6 mb-4">
+                  <div className="flex items-center gap-2 text-on-surface">
+                    <Calendar size={16} className="text-primary" />
+                    <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">August 7, 2026</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-on-surface">
+                    <MapPin size={16} className="text-primary" />
+                    <span className="font-label text-[10px] md:text-xs uppercase tracking-widest">IEM Gurukul Building</span>
+                  </div>
+                </div>
+
+                {/* Countdown Timer */}
+                <div className="mb-10">
+                  <Countdown targetDate="2026-08-07T00:00:00" />
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <motion.a
+                    href="https://forms.gle/bQCmxNk5TcDDLRv49"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative inline-flex items-center gap-2 bg-primary text-on-primary font-label text-xs uppercase tracking-[0.2em] font-black px-8 py-4 glow-primary hover:bg-white transition-all overflow-hidden"
+                  >
+                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                    <FileText size={16} />
+                    Register Now
+                  </motion.a>
+                  <Link
+                    to="/initiatives/event"
+                    className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold hover:gap-4 transition-all border border-primary/30 px-6 py-4 hover:bg-primary/10 backdrop-blur-sm bg-surface-dim/30"
+                  >
+                    View Details
+                    <ArrowUpRight size={16} />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Scan line effect */}
+              <div className="card-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+            </motion.div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

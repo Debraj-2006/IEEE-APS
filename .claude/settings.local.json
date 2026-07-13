@@ -4,7 +4,13 @@
       "Bash(npm run:*)",
       "Bash(powershell -Command \"Copy-Item ''D:\\\\CODES\\\\claude\\\\APS\\\\satalite.glb'' ''D:\\\\CODES\\\\claude\\\\APS\\\\public\\\\satellite.glb''\")",
       "Bash(powershell -Command \"New-Item -ItemType Directory -Path ''D:\\\\CODES\\\\claude\\\\APS\\\\public'' -Force; Copy-Item ''D:\\\\CODES\\\\claude\\\\APS\\\\satalite.glb'' ''D:\\\\CODES\\\\claude\\\\APS\\\\public\\\\satellite.glb''\")",
-      "Bash(npm list:*)"
+      "Bash(npm list:*)",
+      "WebFetch(domain:ieee-aps.vercel.app)",
+      "Bash(npx tsc *)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(taskkill //F //IM node.exe //FI \"WINDOWTITLE eq *vite*\")",
+      "Bash(pkill -f \"vite --port=3000\")"
     ]
   }
 }

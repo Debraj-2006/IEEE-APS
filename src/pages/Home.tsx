@@ -680,9 +680,9 @@ export function Home() {
                   <div className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-primary font-label text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(0,212,255,0.2)]">
                     Special Event
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/15 backdrop-blur-md border border-green-500/40 text-green-400 font-label text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(34,197,94,0.2)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_6px_rgba(34,197,94,0.8)]" />
-                    Registration Open
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-500/15 backdrop-blur-md border border-red-500/40 text-red-400 font-label text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400 shadow-[0_0_6px_rgba(239,68,68,0.8)]" />
+                    Registration Closed
                   </div>
                 </div>
                 <h3 className="font-headline text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors duration-500 text-shadow-lg">
@@ -709,18 +709,13 @@ export function Home() {
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                  <motion.a
-                    href="https://forms.gle/bQCmxNk5TcDDLRv49"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="relative inline-flex items-center gap-2 bg-primary text-on-primary font-label text-xs uppercase tracking-[0.2em] font-black px-8 py-4 glow-primary hover:bg-white transition-all overflow-hidden"
+                  <div
+                    aria-disabled="true"
+                    className="relative inline-flex items-center gap-2 bg-surface-dim/50 text-on-surface-variant/60 font-label text-xs uppercase tracking-[0.2em] font-black px-8 py-4 border border-white/10 cursor-not-allowed overflow-hidden"
                   >
-                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                     <FileText size={16} />
-                    Register Now
-                  </motion.a>
+                    Registration Closed
+                  </div>
                   <Link
                     to="/initiatives/event"
                     className="inline-flex items-center gap-2 text-primary font-label text-xs uppercase tracking-widest font-bold hover:gap-4 transition-all border border-primary/30 px-6 py-4 hover:bg-primary/10 backdrop-blur-sm bg-surface-dim/30"

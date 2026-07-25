@@ -108,8 +108,6 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
     clone.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
 
         const name = mesh.name.toLowerCase();
         const parentName = mesh.parent?.name.toLowerCase() || '';
@@ -214,14 +212,14 @@ export const Antenna3D: React.FC = () => {
           pointerEvents: 'auto',
         }}
         camera={{ position: [0, 0.2, 7], fov: 30 }}
-        gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+        gl={{ alpha: true, antialias: !isMobile, toneMapping: THREE.ACESFilmicToneMapping }}
         onCreated={({ gl, scene }) => {
           gl.setClearColor(0x000000, 0);
           scene.background = null;
         }}
-        dpr={[1, 2]}
+        dpr={[1, isMobile ? 1 : 1.5]}
       >
-        <directionalLight position={[5, 7, 3]}   intensity={3.5}  color="#ffffff" castShadow />
+        <directionalLight position={[5, 7, 3]}   intensity={3.5}  color="#ffffff" />
         <directionalLight position={[-4, -2, -5]} intensity={1.0} color="#b0d0ff" />
         <pointLight       position={[0, -3, 2]}   intensity={1.2}  color="#4080ff" distance={15} />
         <ambientLight intensity={0.4} color="#101520" />
@@ -231,7 +229,7 @@ export const Antenna3D: React.FC = () => {
           <group position={isMobile ? [0, -0.4, 0] : [1.0, 0, 0]}>
             <SatelliteModel isMobile={isMobile} />
           </group>
-          <Environment preset="studio" background={false} environmentIntensity={1.5} />
+          <Environment preset="studio" background={false} environmentIntensity={1.5} resolution={256} />
         </Suspense>
 
         <OrbitControls

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { MotionConfig } from "motion/react";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { InitiativeDetails } from "./pages/InitiativeDetails";
@@ -25,14 +26,16 @@ function ScrollManager() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollManager />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/initiatives/:type" element={<InitiativeDetails />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <ScrollManager />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/initiatives/:type" element={<InitiativeDetails />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </MotionConfig>
   );
 }

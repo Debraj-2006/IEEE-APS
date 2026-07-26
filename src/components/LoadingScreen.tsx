@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Satellite, Radio, Wifi, Cpu, Activity } from 'lucide-react';
 
 const phases = [
@@ -12,18 +12,20 @@ const phases = [
 
 export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished }) => {
   const [step, setStep] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    const stepDelay = prefersReducedMotion ? 0 : 1000;
     const timer = setTimeout(() => {
       if (step < 4) {
         setStep(step + 1);
       } else {
-        setTimeout(onFinished, 1200);
+        setTimeout(onFinished, prefersReducedMotion ? 0 : 1200);
       }
-    }, 1000);
+    }, stepDelay);
 
     return () => clearTimeout(timer);
-  }, [step, onFinished]);
+  }, [step, onFinished, prefersReducedMotion]);
 
   return (
     <motion.div

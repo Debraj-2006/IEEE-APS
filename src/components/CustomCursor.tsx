@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 export function CustomCursor() {
+  const prefersReducedMotion = useReducedMotion();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const trailRefs = useRef<HTMLDivElement[]>([]);
@@ -77,8 +79,8 @@ export function CustomCursor() {
     };
   }, []);
 
-  // Don't render on mobile / touch devices
-  if (isMobile) return null;
+  // Don't render on mobile/touch devices, or when the user prefers reduced motion
+  if (isMobile || prefersReducedMotion) return null;
 
   return (
     <>

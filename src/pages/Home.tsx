@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
 import { 
   Network, 
@@ -31,11 +31,28 @@ import {
   Facebook,
   Globe
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { Antenna3D } from "../components/Antenna3D";
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { TeamSection } from "../components/TeamSection";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { GallerySection } from "../components/GallerySection";
+
+// Code-split the WebGL satellite scene out of the main bundle — it pulls in
+// three.js + @react-three/fiber/drei, which are unnecessary weight for users
+// who never see it rendered (reduced-motion) or while the rest of the hero
+// is still hydrating.
+const Antenna3D = lazy(() => import("../components/Antenna3D").then(m => ({ default: m.Antenna3D })));
+
+const AntennaFallback = () => (
+  <div className="w-full h-[350px] lg:h-[400px] relative flex items-center justify-center">
+    <div className="relative w-40 h-40 flex items-center justify-center border border-primary/20 bg-primary/5">
+      <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary/50" />
+      <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary/50" />
+      <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-primary/50" />
+      <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary/50" />
+      <Satellite size={48} className="text-primary/70" />
+    </div>
+  </div>
+);
 
 
 
@@ -330,6 +347,62 @@ const Countdown = ({ targetDate }: { targetDate: string }) => {
   );
 };
 
+// Conference data — keep endDate/sortDate in sync with InitiativeDetails.tsx's "conference" category
+const CONFERENCES = {
+  apsDomain: [
+    { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", sortDate: "2026-12-14", endDate: "2026-12-19", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, India" },
+    { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", sortDate: "2027-03-15", endDate: "2027-03-18", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, India" },
+    { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", sortDate: "2026-07-12", endDate: "2026-07-18", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, USA" },
+    { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", sortDate: "2026-10-19", endDate: "2026-10-23", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA" }
+  ],
+  interdisciplinary: [] as { id: number; title: string; date: string; sortDate: string; endDate: string; image: string; link: string; location: string }[],
+};
+
+const isPastConference = (endDate: string) => new Date(endDate) < new Date();
+
+const ConferenceCard = ({ event, index = 0 }: { event: typeof CONFERENCES.apsDomain[number]; index?: number }) => {
+  const past = isPastConference(event.endDate);
+  return (
+    <motion.a
+      href={event.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="glass-card overflow-hidden group cursor-pointer flex flex-col h-full event-card-enhanced"
+    >
+      <div className="relative h-56 overflow-hidden shrink-0">
+        <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/30 to-transparent" />
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <div className={`w-1.5 h-1.5 rounded-full ${!past ? 'bg-primary animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.8)]' : 'bg-secondary shadow-[0_0_8px_rgba(190,0,39,0.6)]'}`} />
+          <span className={`font-label text-[9px] uppercase font-bold tracking-widest ${!past ? 'text-primary' : 'text-secondary'}`}>
+            {past ? 'Past' : 'Upcoming'}
+          </span>
+        </div>
+        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-dim/60 backdrop-blur-sm border border-outline-variant/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <ArrowUpRight size={14} className="text-on-surface" />
+        </div>
+      </div>
+      <div className="p-6 flex flex-col flex-1">
+        <h4 className="font-headline text-lg font-black text-on-surface uppercase tracking-tight mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2">{event.title}</h4>
+        <div className="mt-auto flex flex-col gap-2">
+          <div className="flex items-center gap-2 text-on-surface-variant/60 font-label text-[10px] uppercase tracking-widest">
+            <Calendar size={12} className="shrink-0 text-primary/60" />
+            <span className="truncate">{event.date}</span>
+          </div>
+          <div className="flex items-center gap-2 text-on-surface-variant/60 font-label text-[10px] uppercase tracking-widest">
+            <MapPin size={12} className="shrink-0 text-primary/60" />
+            <span className="truncate">{event.location}</span>
+          </div>
+        </div>
+      </div>
+    </motion.a>
+  );
+};
+
 // EDIT YOUR SOCIAL MEDIA LINKS HERE:
 const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/company/ieee-iem-aps-student-branch-chapter/",
@@ -347,6 +420,21 @@ export function Home() {
     setIsLoading(false);
     sessionStorage.setItem('hasLoadedBefore', 'true');
   };
+  const prefersReducedMotion = useReducedMotion();
+  const [confFilter, setConfFilter] = useState<"upcoming" | "past">("upcoming");
+
+  const sortConferences = (events: typeof CONFERENCES.apsDomain) => {
+    const filtered = events.filter(e => confFilter === "past" ? isPastConference(e.endDate) : !isPastConference(e.endDate));
+    filtered.sort((a, b) => {
+      const diff = new Date(a.sortDate).getTime() - new Date(b.sortDate).getTime();
+      return confFilter === "past" ? -diff : diff;
+    });
+    return filtered;
+  };
+
+  const apsDomainConferences = useMemo(() => sortConferences(CONFERENCES.apsDomain), [confFilter]);
+  const interdisciplinaryConferences = useMemo(() => sortConferences(CONFERENCES.interdisciplinary), [confFilter]);
+
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -436,7 +524,13 @@ export function Home() {
             className="w-full relative"
             style={{ overflow: 'visible' }}
           >
-            <Antenna3D />
+            {prefersReducedMotion ? (
+              <AntennaFallback />
+            ) : (
+              <Suspense fallback={<AntennaFallback />}>
+                <Antenna3D />
+              </Suspense>
+            )}
           </motion.div>
         </div>
 
@@ -797,63 +891,60 @@ export function Home() {
             <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Conferences</h2>
             <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">Global Reach and Networking</p>
             <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
+
+            {/* Upcoming / Past toggle */}
+            <div className="inline-flex mt-10 border border-outline-variant/20 bg-surface-container-high/30 backdrop-blur-sm p-1">
+              {(["upcoming", "past"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setConfFilter(tab)}
+                  aria-pressed={confFilter === tab}
+                  className={`px-6 py-2.5 font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300 ${
+                    confFilter === tab
+                      ? "bg-primary text-on-primary shadow-[0_0_15px_rgba(0,212,255,0.3)]"
+                      : "text-on-surface-variant/60 hover:text-primary"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="mb-12 border-l-4 border-primary pl-4">
             <h3 className="text-2xl font-headline font-bold text-white uppercase tracking-wider">APS Domain Conferences</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-            {[
-              { id: 8, title: "IEEE MAPCON", date: "Dec 14-18, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80", link: "https://ieeemapcon.org/", location: "Nagpur, India" },
-              { id: 9, title: "IEEE APSCON", date: "Mar 15-17, 2027", type: "Upcoming", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80", link: "https://2027.ieee-apscon.org/", location: "Hyderabad, India" },
-              { id: 10, title: "IEEE AP-S/URSI", date: "Jul 12-17, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80", link: "https://2026.apsursi.org/", location: "Detroit, USA" },
-              { id: 11, title: "IEEE IMAS", date: "Oct 19-22, 2026", type: "Upcoming", image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80", link: "https://imas-ieee.org/", location: "Jeddah, KSA" }
-            ].map((event, index) => (
-              <motion.a 
-                key={event.id}
-                href={event.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-card overflow-hidden group cursor-pointer flex flex-col h-full"
-              >
-                <div className="relative h-48 overflow-hidden shrink-0">
-                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="bg-primary text-on-primary px-2 py-1 text-[9px] font-bold uppercase tracking-widest">{event.type}</span>
-                  </div>
-                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight size={14} className="text-on-surface" />
-                  </div>
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-headline text-xl font-bold uppercase tracking-tight text-on-surface group-hover:text-primary transition-colors mb-4 line-clamp-2">{event.title}</h3>
-                  <div className="mt-auto flex flex-col gap-2">
-                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                      <Calendar size={12} className="shrink-0 text-primary/60" />
-                      <span className="truncate">{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                      <MapPin size={12} className="shrink-0 text-primary/60" />
-                      <span className="truncate">{event.location}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.a>
-            ))}
+            {apsDomainConferences.length > 0 ? (
+              apsDomainConferences.map((event, index) => (
+                <ConferenceCard key={event.id} event={event} index={index} />
+              ))
+            ) : (
+              <div className="col-span-full py-12 text-center border-2 border-dashed border-outline-variant/20 bg-surface/30 backdrop-blur-sm rounded-lg">
+                <Calendar className="mx-auto h-8 w-8 text-on-surface-variant/40 mb-3" />
+                <p className="text-on-surface-variant/70 font-label uppercase tracking-widest text-xs">
+                  No {confFilter} conferences to show.
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="mb-12 border-l-4 border-primary pl-4">
             <h3 className="text-2xl font-headline font-bold text-white uppercase tracking-wider">Interdisciplinary Conferences</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <div className="col-span-full py-12 text-center border-2 border-dashed border-outline-variant/20 bg-surface/30 backdrop-blur-sm rounded-lg">
-              <Calendar className="mx-auto h-8 w-8 text-on-surface-variant/40 mb-3" />
-              <p className="text-on-surface-variant/70 font-label uppercase tracking-widest text-xs">No events scheduled currently.</p>
-            </div>
+            {interdisciplinaryConferences.length > 0 ? (
+              interdisciplinaryConferences.map((event, index) => (
+                <ConferenceCard key={event.id} event={event} index={index} />
+              ))
+            ) : (
+              <div className="col-span-full py-12 text-center border-2 border-dashed border-outline-variant/20 bg-surface/30 backdrop-blur-sm rounded-lg">
+                <Calendar className="mx-auto h-8 w-8 text-on-surface-variant/40 mb-3" />
+                <p className="text-on-surface-variant/70 font-label uppercase tracking-widest text-xs">
+                  No {confFilter} conferences to show.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -47,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen selection:bg-primary selection:text-on-primary">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <CustomCursor />
       {/* HUD Scanline Effect */}
       <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
@@ -174,7 +175,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </nav>
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         {children}
       </main>
 

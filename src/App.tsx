@@ -1,23 +1,62 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { MotionConfig } from "motion/react";
+import { MotionConfig, useReducedMotion } from "motion/react";
+import Lenis from "lenis";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { InitiativeDetails } from "./pages/InitiativeDetails";
+import { getLenis, setLenis } from "./lib/smoothScroll";
+
+// Buttery momentum scrolling for the whole page (disabled under reduced-motion).
+function SmoothScroll() {
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    const lenis = new Lenis({
+      duration: 1.15,
+      // easeOutExpo — quick start, long glide to a stop
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.6,
+    });
+    setLenis(lenis);
+
+    let raf = 0;
+    const loop = (time: number) => {
+      lenis.raf(time);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis.destroy();
+      setLenis(null);
+    };
+  }, [prefersReducedMotion]);
+
+  return null;
+}
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    const lenis = getLenis();
     if (hash) {
       const element = document.getElementById(hash.replace("#", ""));
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          if (lenis) lenis.scrollTo(element, { offset: -80, duration: 1.4 });
+          else element.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }
     } else {
-      window.scrollTo(0, 0);
+      if (lenis) lenis.scrollTo(0, { immediate: true });
+      else window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
 
@@ -28,6 +67,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Router>
+        <SmoothScroll />
         <ScrollManager />
         <Layout>
           <Routes>

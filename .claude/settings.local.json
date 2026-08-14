@@ -10,7 +10,30 @@
       "Read(//tmp/**)",
       "Bash(curl -s http://localhost:3000/)",
       "Bash(taskkill //F //IM node.exe //FI \"WINDOWTITLE eq *vite*\")",
-      "Bash(pkill -f \"vite --port=3000\")"
+      "Bash(pkill -f \"vite --port=3000\")",
+      "Bash(npx --no-install vercel whoami)",
+      "Bash(npx --no-install vercel ls ieee-aps)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(npx *)",
+      "Skill(run)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4173/)",
+      "Bash(cat /tmp_preview_log.txt)",
+      "Bash(jobs -l)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:4173/)",
+      "Bash(pkill -f \"vite preview\")",
+      "Bash(xargs grep -l \"useReducedMotion\")",
+      "Bash(npm ls *)",
+      "Bash(kill %1)",
+      "Bash(node -e \"console.log\\(new Date\\(\\).toISOString\\(\\)\\)\")",
+      "Bash(node *)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1440,4000 --virtual-time-budget=8000 --screenshot=\"C:\\\\Users\\\\DEBRAJ\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-DEBRAJ-Documents-IEEE-APS\\\\560758f5-3c5e-42b5-a76d-bbc802eb4a19\\\\scratchpad\\\\home.png\" \"http://localhost:3000\")",
+      "Bash(pkill -f \"remote-debugging-port\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --remote-debugging-port=9222 --window-size=1440,1000 about:blank)",
+      "Bash(curl -s http://localhost:9222/json/version)",
+      "Bash(pkill -f \"node.*vite\")"
     ]
   }
 }

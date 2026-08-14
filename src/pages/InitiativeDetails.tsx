@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "motion/react";
-import { ChevronLeft, Calendar, MapPin, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft, Calendar, MapPin, ArrowUpRight, Folder, Images, X } from "lucide-react";
 
 // Mock data for the specific events in each category
 const CATEGORY_DATA: Record<string, { title: string, description: string, events?: any[], subCategories?: { title: string, events: any[] }[] }> = {
@@ -34,11 +34,35 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     description: "Conferences, symposiums, and other major chapter gatherings.",
     events: [
       { id: 2, title: "PromptX", date: "June 25, 2024", type: "Completed", image: "/event/promptx.jpeg" },
-      { id: 3, title: "Sytron", date: "July 15, 2024", type: "Completed", image: "/event/sytron.jpeg" },
-      { id: 4, title: "Sytron - Game Day", date: "July 15, 2024", type: "Completed", image: "/event/game-day.jpeg" },
-      { id: 5, title: "Sytron - FF Tournament", date: "July 15, 2024", type: "Completed", image: "/event/ff-tournament.jpeg" },
-      { id: 6, title: "Sytron - Robotics", date: "July 15, 2024", type: "Completed", image: "/event/robotics.jpeg" },
-      { id: 7, title: "Sytron - Robo Soccer", date: "July 15, 2024", type: "Completed", image: "/event/robo-soccer.jpeg" }
+      {
+        id: 3,
+        title: "Sytron",
+        date: "July 15, 2024",
+        type: "Completed",
+        image: "/event/SYTRON/sytron.jpeg",
+        folder: [
+          { title: "Sytron", image: "/event/SYTRON/sytron.jpeg" },
+          { title: "Game Day", image: "/event/SYTRON/game-day.jpeg" },
+          { title: "FF Tournament", image: "/event/SYTRON/ff-tournament.jpeg" },
+          { title: "Robotics", image: "/event/SYTRON/robotics.jpeg" },
+          { title: "Robo Soccer", image: "/event/SYTRON/robo-soccer.jpeg" }
+        ]
+      },
+      {
+        id: 4,
+        title: "Eclypse",
+        date: "August 7, 2026",
+        type: "Completed",
+        image: "/event/Eclypse/eclypse.jpeg",
+        folder: [
+          { title: "Eclypse", image: "/event/Eclypse/eclypse.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-1.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-2.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-3.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-4.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-5.jpeg" }
+        ]
+      }
     ]
   },
   conference: {
@@ -64,22 +88,37 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
 
 export function InitiativeDetails() {
   const { type } = useParams<{ type: string }>();
-  
+
+  // Folder currently opened in the gallery modal (null = closed)
+  const [openFolder, setOpenFolder] = useState<{ title: string, items: { title: string, image: string }[] } | null>(null);
+  // Index of the poster shown in the full-screen lightbox (-1 = none)
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
+  // Lock body scroll while an overlay is open
+  useEffect(() => {
+    const open = openFolder || lightboxIndex >= 0;
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [openFolder, lightboxIndex]);
+
   // Fallback if category not found
   const data = type && CATEGORY_DATA[type] ? CATEGORY_DATA[type] : { title: "Initiative", description: "Details about this initiative.", events: [] };
 
   const renderEventsGrid = (events: any[]) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {events.filter(event => !event.endDate || new Date(event.endDate) >= new Date()).map((event, i) => {
+        const isFolder = Array.isArray(event.folder);
         const CardWrapper = event.link ? motion.a : motion.div;
         const linkProps = event.link ? { href: event.link, target: "_blank", rel: "noopener noreferrer" } : {};
+        const folderProps = isFolder ? { onClick: () => { setOpenFolder({ title: event.title, items: event.folder }); setLightboxIndex(-1); } } : {};
         return (
-          <CardWrapper 
+          <CardWrapper
             {...linkProps}
+            {...folderProps}
             key={event.id}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -87,10 +126,10 @@ export function InitiativeDetails() {
             className="glass-card overflow-hidden group cursor-pointer flex flex-col"
           >
             <div className="relative h-48 overflow-hidden shrink-0">
-              <img 
-                src={event.image} 
-                alt={event.title} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img
+                src={event.image}
+                alt={event.title}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-widest ${event.type === 'Upcoming' ? 'bg-primary text-on-primary' : 'bg-surface/80 text-on-surface backdrop-blur-md'}`}>
@@ -101,6 +140,19 @@ export function InitiativeDetails() {
                 <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <ArrowUpRight size={14} className="text-on-surface" />
                 </div>
+              )}
+              {isFolder && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface/70 via-transparent to-transparent" />
+                  <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface/80 backdrop-blur-md text-on-surface font-label text-[9px] font-bold uppercase tracking-widest">
+                    <Images size={12} className="text-primary" />
+                    {event.folder.length}
+                  </div>
+                  <div className="absolute bottom-3 left-4 inline-flex items-center gap-1.5 text-white font-label text-[10px] uppercase tracking-widest drop-shadow">
+                    <Folder size={13} className="text-primary" />
+                    Folder
+                  </div>
+                </>
               )}
             </div>
             <div className="p-6 flex flex-col flex-1">
@@ -116,6 +168,12 @@ export function InitiativeDetails() {
                   <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
                     <MapPin size={12} className="shrink-0 text-primary/60" />
                     <span className="truncate">{event.location}</span>
+                  </div>
+                )}
+                {isFolder && (
+                  <div className="flex items-center gap-2 text-primary font-label text-[10px] uppercase tracking-widest">
+                    <Images size={12} className="shrink-0" />
+                    <span className="truncate">View {event.folder.length} posters</span>
                   </div>
                 )}
               </div>
@@ -178,6 +236,93 @@ export function InitiativeDetails() {
           renderEventsGrid(data.events || [])
         )}
       </div>
+
+      {/* Folder gallery modal */}
+      <AnimatePresence>
+        {openFolder && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+            onClick={() => setOpenFolder(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card w-full max-w-5xl max-h-[85vh] overflow-hidden flex flex-col"
+            >
+              <div className="flex items-center justify-between gap-4 p-6 border-b border-outline-variant/20 shrink-0">
+                <div className="flex items-center gap-3">
+                  <Folder size={18} className="text-primary" />
+                  <h3 className="font-headline text-xl md:text-2xl font-black uppercase tracking-tight text-on-surface">{openFolder.title}</h3>
+                  <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60">{openFolder.items.length} posters</span>
+                </div>
+                <button
+                  onClick={() => setOpenFolder(null)}
+                  aria-label="Close gallery"
+                  className="w-9 h-9 rounded-full bg-surface/60 hover:bg-surface flex items-center justify-center text-on-surface transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="p-6 overflow-y-auto" data-lenis-prevent>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {openFolder.items.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setLightboxIndex(idx)}
+                      className="glass-card overflow-hidden group text-left flex flex-col cursor-pointer"
+                    >
+                      <div className="relative aspect-[4/5] overflow-hidden bg-black/40 flex items-center justify-center">
+                        {/* object-contain so landscape & portrait posters both show in full without cropping */}
+                        <img src={item.image} alt={item.title} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-surface/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <div className="p-3">
+                        <p className="font-label text-[10px] uppercase tracking-widest text-on-surface group-hover:text-primary transition-colors truncate">{item.title}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Full-screen poster lightbox */}
+      <AnimatePresence>
+        {openFolder && lightboxIndex >= 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] bg-black/95 flex items-center justify-center p-4 sm:p-10"
+            onClick={() => setLightboxIndex(-1)}
+          >
+            <button
+              onClick={() => setLightboxIndex(-1)}
+              aria-label="Close poster"
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-surface/60 hover:bg-surface flex items-center justify-center text-on-surface transition-colors z-10"
+            >
+              <X size={18} />
+            </button>
+            <motion.img
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              onClick={(e) => e.stopPropagation()}
+              src={openFolder.items[lightboxIndex].image}
+              alt={openFolder.items[lightboxIndex].title}
+              className="max-w-full max-h-full object-contain shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

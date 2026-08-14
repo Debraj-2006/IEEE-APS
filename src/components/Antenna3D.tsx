@@ -191,6 +191,10 @@ function SatelliteModel({ isMobile }: { isMobile?: boolean }) {
 /* ─── Root component ─── */
 export const Antenna3D: React.FC = () => {
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 1024);
+  // Pause the WebGL render loop whenever the hero canvas is off-screen so the
+  // GPU isn't pegged rendering an invisible satellite while the user scrolls.
+  const [isVisible, setIsVisible] = React.useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -198,10 +202,22 @@ export const Antenna3D: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: '100px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="w-full h-[350px] lg:h-[400px] relative pointer-events-none overflow-visible">
+    <div ref={containerRef} className="w-full h-[350px] lg:h-[400px] relative pointer-events-none overflow-visible">
       {/* Canvas is oversized to prevent any clipping of the satellite wings */}
       <Canvas
+        frameloop={isVisible ? 'always' : 'never'}
         style={{
           position: 'absolute',
           top: isMobile ? '-10%' : '-30%',

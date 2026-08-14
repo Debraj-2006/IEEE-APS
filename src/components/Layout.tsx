@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook, ExternalLink } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { CustomCursor } from "./CustomCursor";
@@ -45,10 +45,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Page scroll progress → smoothed bar at the very top
+  const { scrollYProgress } = useScroll();
+  const progressScaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
+
   return (
     <div className="min-h-screen selection:bg-primary selection:text-on-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <CustomCursor />
+      {/* Scroll progress bar */}
+      <motion.div
+        style={{ scaleX: progressScaleX }}
+        className="fixed top-0 left-0 right-0 h-[3px] bg-primary origin-left z-[101] shadow-[0_0_10px_rgba(0,212,255,0.9)]"
+      />
       {/* HUD Scanline Effect */}
       <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
         <div className="scanline" />
@@ -75,7 +84,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavItem href="/#initiatives" label="Initiatives" active={isActive("/#initiatives")} />
             <NavItem href="/#conferences" label="Conferences" active={isActive("/#conferences")} />
             <NavItem href="/#benefits" label="Benefits" active={isActive("/#benefits")} />
-            <NavItem href="/#gallery" label="Gallery" active={isActive("/#gallery")} />
             <NavItem href="/#team" label="Team" active={isActive("/#team")} />
             <NavItem href="/#social" label="Social" active={isActive("/#social")} />
             <a 
@@ -151,7 +159,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Link to="/#initiatives" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#initiatives") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Initiatives</Link>
                   <Link to="/#conferences" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#conferences") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Conferences</Link>
                   <Link to="/#benefits" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#benefits") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Benefits</Link>
-                  <Link to="/#gallery" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#gallery") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Gallery</Link>
                   <Link to="/#team" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#team") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Team</Link>
                   <Link to="/#social" onClick={() => setMobileMenuOpen(false)} className={`font-label uppercase text-xs tracking-widest border-b pb-4 transition-colors ${isActive("/#social") ? "text-primary border-primary/50" : "text-on-surface hover:text-primary border-outline-variant/10"}`}>Social</Link>
                   <a 
@@ -212,7 +219,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-label text-[10px] text-primary uppercase tracking-[0.3em] font-bold mb-8">Navigation</h4>
               <div className="space-y-4">
-                {[{label: 'About', href: '/#about'}, {label: 'Initiatives', href: '/#initiatives'}, {label: 'Conferences', href: '/#conferences'}, {label: 'Benefits', href: '/#benefits'}, {label: 'Gallery', href: '/#gallery'}, {label: 'Team', href: '/#team'}].map(link => (
+                {[{label: 'About', href: '/#about'}, {label: 'Initiatives', href: '/#initiatives'}, {label: 'Conferences', href: '/#conferences'}, {label: 'Benefits', href: '/#benefits'}, {label: 'Team', href: '/#team'}].map(link => (
                   <Link key={link.label} to={link.href} className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-on-surface-variant/50 hover:text-primary transition-colors group">
                     <ChevronRight size={12} className="text-primary/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     {link.label}

@@ -34,7 +34,8 @@
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --remote-debugging-port=9222 --window-size=1440,1000 about:blank)",
       "Bash(curl -s http://localhost:9222/json/version)",
       "Bash(pkill -f \"node.*vite\")",
-      "Skill(claude-api)"
+      "Skill(claude-api)",
+      "Bash(npm uninstall *)"
     ]
   }
 }

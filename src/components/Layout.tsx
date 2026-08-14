@@ -3,7 +3,6 @@ import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { Menu, X, FileText, ChevronRight, Linkedin, Instagram, Facebook, ExternalLink } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { CustomCursor } from "./CustomCursor";
-import { Marconi } from "./Marconi";
 
 const NavItem = ({ href, label, active = false }: { href: string; label: string; active?: boolean }) => (
   <Link 
@@ -54,7 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen selection:bg-primary selection:text-on-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <CustomCursor />
-      <Marconi />
       {/* Scroll progress bar */}
       <motion.div
         style={{ scaleX: progressScaleX }}

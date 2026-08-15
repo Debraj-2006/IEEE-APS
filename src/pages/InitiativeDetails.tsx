@@ -84,7 +84,8 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
           { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-2.jpeg" },
           { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-3.jpeg" },
           { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-4.jpeg" },
-          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-5.jpeg" }
+          { title: "Eclypse", image: "/event/Eclypse/eclypse-photo-5.jpeg" },
+          { title: "Eclypse", image: "/event/Eclypse/WhatsApp Image 2026-08-15 at 13.32.34.jpeg" }
         ]
       }
     ]

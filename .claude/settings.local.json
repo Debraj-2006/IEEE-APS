@@ -35,7 +35,14 @@
       "Bash(curl -s http://localhost:9222/json/version)",
       "Bash(pkill -f \"node.*vite\")",
       "Skill(claude-api)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(git mv *)",
+      "Bash(mv \"public/idustrial visit\" \"public/industrial visit\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\\\\\(x86\\\\\\)/Google/Chrome/Application/**)",
+      "PowerShell(Start-Process \"http://localhost:3000/initiative/industry\")",
+      "PowerShell(Start-Process \"http://localhost:3000/initiatives/industry\")"
     ]
   }
 }

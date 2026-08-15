@@ -27,7 +27,31 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
   industry: {
     title: "Industrial Visits",
     description: "Field trips to leading technology companies and research facilities.",
-    events: []
+    events: [
+      {
+        id: 5,
+        title: "CARE - IIT Delhi",
+        date: "August 15, 2026",
+        type: "Completed",
+        image: "/industrial visit/CARE - IIT DELHI/WhatsApp Image 2026-08-15 at 00.51.10.jpeg",
+        folder: [
+          { title: "CARE - IIT Delhi", image: "/industrial visit/CARE - IIT DELHI/WhatsApp Image 2026-08-15 at 00.51.10.jpeg" },
+          { title: "CARE - IIT Delhi", image: "/industrial visit/CARE - IIT DELHI/WhatsApp Image 2026-08-15 at 00.51.10 (1).jpeg" },
+          { title: "CARE - IIT Delhi", image: "/industrial visit/CARE - IIT DELHI/WhatsApp Image 2026-08-15 at 00.51.10 (2).jpeg" }
+        ]
+      },
+      {
+        id: 6,
+        title: "JV Micronics",
+        date: "August 15, 2026",
+        type: "Completed",
+        image: "/industrial visit/JV Micronics/WhatsApp Image 2026-08-15 at 00.49.56.jpeg",
+        folder: [
+          { title: "JV Micronics", image: "/industrial visit/JV Micronics/WhatsApp Image 2026-08-15 at 00.49.56.jpeg" },
+          { title: "JV Micronics", image: "/industrial visit/JV Micronics/WhatsApp Image 2026-08-15 at 00.49.56 (1).jpeg" }
+        ]
+      }
+    ]
   },
   event: {
     title: "Special Events",

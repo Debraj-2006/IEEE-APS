@@ -29,7 +29,8 @@ import {
   Linkedin,
   Instagram,
   Facebook,
-  Globe
+  Globe,
+  Briefcase
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { TeamSection } from "../components/TeamSection";
@@ -901,12 +902,33 @@ export function Home() {
               clearance="Global Uplink Established"
               index="02"
             />
-            <BenefitCard 
+            <BenefitCard
               icon={FlaskConical}
               title="Innovation Labs"
               description="Get hands-on experience with simulation tools and hardware testing environments for microwave research."
               clearance="Experimental Protocol Active"
               index="03"
+            />
+            <BenefitCard
+              icon={Briefcase}
+              title="Internship Access"
+              description="Get priority access to internship openings and referrals through IEEE AP-S industry and research partnerships."
+              clearance="Deployment Channel Open"
+              index="04"
+            />
+            <BenefitCard
+              icon={Calendar}
+              title="Conferences"
+              description="Attend and present at IEEE AP-S flagship conferences like APSCON, MAPCON, and AP-S/URSI at member rates."
+              clearance="Credentials Verified"
+              index="05"
+            />
+            <BenefitCard
+              icon={FileText}
+              title="Paper Publication"
+              description="Get mentorship and support to publish research in IEEE journals, transactions, and conference proceedings."
+              clearance="Manuscript Uplink Ready"
+              index="06"
             />
           </div>
         </div>

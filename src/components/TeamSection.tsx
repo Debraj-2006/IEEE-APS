@@ -1,5 +1,6 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "motion/react";
 import { useState } from "react";
+import type { MouseEvent } from "react";
 import {
   Shield,
   Users,
@@ -452,9 +453,28 @@ const MemberModal = ({ member, onClose }: { member: typeof MEMBERS[0]; onClose: 
   );
 };
 
-/* ─── Member Card (Grid Item) ─── */
+/* ─── Member Card (Grid Item) ───
+   Styled as a tilting holographic ID badge: cut-corner dossier silhouette,
+   cursor-tracked 3D tilt, and a holo sheen that follows the pointer. */
 const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: number }) => {
   const [showModal, setShowModal] = useState(false);
+
+  // Pointer position normalized to 0–1 across the card, driving both the
+  // 3D tilt and the holo sheen so they track the same point under the cursor.
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), { stiffness: 260, damping: 22 });
+  const rotateY = useSpring(useTransform(px, [0, 1], [-9, 9]), { stiffness: 260, damping: 22 });
+
+  const handlePointerMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - rect.left) / rect.width);
+    py.set((e.clientY - rect.top) / rect.height);
+  };
+  const handlePointerLeave = () => {
+    px.set(0.5);
+    py.set(0.5);
+  };
 
   return (
     <>
@@ -464,9 +484,24 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
         viewport={{ once: true }}
         transition={{ delay: index * 0.08, duration: 0.5 }}
         className="group cursor-pointer h-full"
+        style={{ perspective: 1000 }}
         onClick={() => setShowModal(true)}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
       >
-        <div className="glass-card p-0 relative overflow-hidden hover:border-primary/30 transition-all duration-500 h-full flex flex-col">
+        <motion.div
+          className="id-badge glass-card p-0 relative overflow-hidden hover:border-primary/30 transition-colors duration-500 h-full flex flex-col"
+          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        >
+          {/* Cut-corner accent brackets (the two corners the clip-path leaves square) */}
+          <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary/50 group-hover:border-primary transition-colors z-20" />
+          <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary/50 group-hover:border-primary transition-colors z-20" />
+
+          {/* Operative ID tag */}
+          <div className="absolute top-3 left-3 z-20 font-mono text-[8px] tracking-widest text-primary/50 group-hover:text-primary/80 transition-colors">
+            OP-{String(index + 1).padStart(2, "0")}
+          </div>
+
           {/* Scan line */}
           <div className="card-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -490,7 +525,7 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
 
             {/* LinkedIn icon */}
             {member.linkedin && member.linkedin !== "#" && (
-              <a 
+              <a
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -500,6 +535,28 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
                 <Linkedin size={12} />
               </a>
             )}
+
+            {/* HUD targeting reticle — locks onto the photo on hover, cyan-only */}
+            <div className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-8 left-3 w-4 h-4 border-t border-l border-primary/70 scale-50 group-hover:scale-100 transition-transform duration-500 ease-out" />
+              <div className="absolute top-8 right-3 w-4 h-4 border-t border-r border-primary/70 scale-50 group-hover:scale-100 transition-transform duration-500 ease-out" />
+              <div className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-primary/70 scale-50 group-hover:scale-100 transition-transform duration-500 ease-out" />
+              <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-primary/70 scale-50 group-hover:scale-100 transition-transform duration-500 ease-out" />
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg width="52" height="52" viewBox="0 0 52 52" className="text-primary opacity-0 group-hover:opacity-90 scale-150 group-hover:scale-100 transition-all duration-500 delay-100 ease-out">
+                  <circle cx="26" cy="26" r="18" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4" />
+                  <line x1="26" y1="0" x2="26" y2="10" stroke="currentColor" strokeWidth="1.5" />
+                  <line x1="26" y1="42" x2="26" y2="52" stroke="currentColor" strokeWidth="1.5" />
+                  <line x1="0" y1="26" x2="10" y2="26" stroke="currentColor" strokeWidth="1.5" />
+                  <line x1="42" y1="26" x2="52" y2="26" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+              </div>
+
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[8px] text-primary tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                ID VERIFIED
+              </div>
+            </div>
           </div>
 
           {/* Info */}
@@ -540,7 +597,7 @@ const MemberCard = ({ member, index }: { member: typeof MEMBERS[0]; index: numbe
 
           {/* Bottom accent */}
           <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* Modal */}

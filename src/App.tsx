@@ -15,9 +15,11 @@ function SmoothScroll() {
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
-      // easeOutExpo — quick start, long glide to a stop
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // lerp-driven (not duration+easing): each frame chases the target
+      // scroll position instead of running a fixed-length glide, so it
+      // stays responsive to rapid/continuous wheel input instead of
+      // dragging out a long tail after you stop scrolling.
+      lerp: 0.12,
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.6,
@@ -50,7 +52,7 @@ function ScrollManager() {
       const element = document.getElementById(hash.replace("#", ""));
       if (element) {
         setTimeout(() => {
-          if (lenis) lenis.scrollTo(element, { offset: -80, duration: 1.4 });
+          if (lenis) lenis.scrollTo(element, { offset: -80, duration: 1 });
           else element.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }

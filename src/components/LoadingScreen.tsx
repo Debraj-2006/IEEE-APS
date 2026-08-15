@@ -102,46 +102,47 @@ export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished
         <div className="absolute inset-0 bg-[linear-gradient(rgba(0,212,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.15)_1px,transparent_1px)] bg-[size:40px_40px] [transform:perspective(500px)_rotateX(60deg)_translateY(-100px)_translateZ(200px)] animate-[grid-move_20s_linear_infinite]" />
       </div>
 
-      {/* Vertical scan-line sweep */}
+      {/* Vertical scan-line sweep, with a brief flicker/stutter partway through each pass */}
       {!prefersReducedMotion && (
         <motion.div
           className="absolute left-0 right-0 h-24 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, rgba(0,212,255,0.12) 50%, transparent)' }}
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(0,212,255,0.14) 50%, transparent)' }}
           initial={{ top: '-10%' }}
-          animate={{ top: ['-10%', '110%'] }}
-          transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ top: ['-10%', '110%'], opacity: [1, 1, 0.2, 0.9, 0.3, 1, 1] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: 'linear' }}
         />
       )}
 
-      {/* Digital glitch slices — horizontal bands that jump & flicker */}
+      {/* Secondary thin scanline, offset timing for a denser signal-loss feel */}
       {!prefersReducedMotion && (
-        <div className="absolute inset-0 pointer-events-none mix-blend-screen overflow-hidden">
-          {[
-            { top: '22%', h: 10, dur: 3.1, delay: 0.4, x: 18, c: 'rgba(0,212,255,0.35)' },
-            { top: '41%', h: 6, dur: 2.3, delay: 1.5, x: -26, c: 'rgba(255,0,80,0.30)' },
-            { top: '58%', h: 14, dur: 3.6, delay: 0.9, x: 12, c: 'rgba(0,212,255,0.30)' },
-            { top: '73%', h: 5, dur: 2.7, delay: 2.1, x: -16, c: 'rgba(125,194,66,0.30)' },
-            { top: '88%', h: 8, dur: 3.0, delay: 1.1, x: 22, c: 'rgba(0,212,255,0.25)' },
-          ].map((g, i) => (
-            <motion.div
-              key={i}
-              className="absolute left-0 right-0"
-              style={{ top: g.top, height: g.h, background: g.c }}
-              initial={{ opacity: 0, x: 0 }}
-              animate={{ opacity: [0, 0, 0.9, 0, 0.7, 0], x: [0, 0, g.x, -g.x, g.x, 0] }}
-              transition={{ duration: g.dur, delay: g.delay, repeat: Infinity, repeatDelay: 1.6, times: [0, 0.7, 0.78, 0.85, 0.92, 1], ease: 'linear' }}
-            />
-          ))}
-        </div>
+        <motion.div
+          className="absolute left-0 right-0 h-8 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(190,0,39,0.18) 50%, transparent)' }}
+          initial={{ top: '-5%' }}
+          animate={{ top: ['-5%', '105%'] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'linear', delay: 0.6 }}
+        />
       )}
 
-      {/* Full-screen RGB-split flash bursts */}
+      {/* Static / noise texture — faint TV-static grain that flickers */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none mix-blend-overlay"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+          animate={{ opacity: [0.03, 0.08, 0.03, 0.09, 0.04, 0.07, 0.03] }}
+          transition={{ duration: 0.4, repeat: Infinity, ease: 'linear' }}
+        />
+      )}
+
+      {/* Full-screen RGB-split flash flicker (color only, no movement) */}
       {!prefersReducedMotion && (
         <motion.div
           className="absolute inset-0 pointer-events-none mix-blend-screen"
-          style={{ background: 'linear-gradient(90deg, rgba(255,0,80,0.06), transparent 20%, transparent 80%, rgba(0,212,255,0.06))' }}
-          animate={{ opacity: [0, 0, 1, 0, 1, 0], x: [0, 0, -4, 4, -2, 0] }}
-          transition={{ duration: 4, repeat: Infinity, times: [0, 0.9, 0.92, 0.94, 0.96, 1] }}
+          style={{ background: 'linear-gradient(90deg, rgba(255,0,80,0.07), transparent 20%, transparent 80%, rgba(0,212,255,0.07))' }}
+          animate={{ opacity: [0, 0, 1, 0, 0.6, 0, 0.8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, times: [0, 0.88, 0.9, 0.92, 0.94, 0.96, 0.98, 1] }}
         />
       )}
 
@@ -353,17 +354,17 @@ export const LoadingScreen: React.FC<{ onFinished: () => void }> = ({ onFinished
             className="font-headline text-3xl md:text-5xl font-black text-white tracking-widest uppercase"
             style={{ textShadow: '0 0 20px rgba(0, 212, 255, 0.4)' }}
             animate={prefersReducedMotion ? {} : {
-              x: [0, 0, -2, 2, -1, 0],
               textShadow: [
                 '0 0 20px rgba(0,212,255,0.4)',
+                '3px 0 rgba(255,0,80,0.85), -3px 0 rgba(0,212,255,0.85)',
                 '0 0 20px rgba(0,212,255,0.4)',
-                '2px 0 rgba(255,0,80,0.7), -2px 0 rgba(0,212,255,0.7)',
-                '-2px 0 rgba(255,0,80,0.7), 2px 0 rgba(0,212,255,0.7)',
+                '-4px 0 rgba(255,0,80,0.85), 4px 0 rgba(0,212,255,0.85)',
                 '0 0 20px rgba(0,212,255,0.4)',
+                '2px 1px rgba(255,0,80,0.8), -2px -1px rgba(0,212,255,0.8)',
                 '0 0 20px rgba(0,212,255,0.4)',
               ],
             }}
-            transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 1.4, times: [0, 0.85, 0.88, 0.92, 0.96, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 0.5, times: [0, 0.12, 0.2, 0.35, 0.45, 0.6, 0.7] }}
           >
             <ScrambleText text="IEEE AP-S" disabled={!!prefersReducedMotion} />
           </motion.h2>

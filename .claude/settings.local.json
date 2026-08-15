@@ -42,7 +42,9 @@
       "Read(//c/Program Files/Google/Chrome/Application/**)",
       "Read(//c/Program Files \\\\\\(x86\\\\\\)/Google/Chrome/Application/**)",
       "PowerShell(Start-Process \"http://localhost:3000/initiative/industry\")",
-      "PowerShell(Start-Process \"http://localhost:3000/initiatives/industry\")"
+      "PowerShell(Start-Process \"http://localhost:3000/initiatives/industry\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/)",
+      "PowerShell(Start-Process \"http://localhost:3000/\")"
     ]
   }
 }

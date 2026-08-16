@@ -30,7 +30,9 @@ import {
   Instagram,
   Facebook,
   Globe,
-  Briefcase
+  Briefcase,
+  GraduationCap,
+  Rocket
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { TeamSection } from "../components/TeamSection";
@@ -249,6 +251,82 @@ const BenefitCard = ({ icon: Icon, title, description, clearance, index = "01" }
     {/* Bottom accent */}
     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
   </motion.div>
+);
+
+const AchievementCard = ({ icon: Icon, stat, statLabel, title, description, tag, link, team }: any) => (
+  <motion.a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -6 }}
+    transition={{ duration: 0.4 }}
+    className="glass-card p-8 md:p-10 group hover:border-primary/40 transition-all duration-500 relative overflow-hidden flex flex-col sm:flex-row gap-6 sm:gap-8 items-start cursor-pointer"
+  >
+    {/* Scan line */}
+    <div className="card-scan-line opacity-0 group-hover:opacity-100 transition-opacity" />
+
+    {/* View post indicator */}
+    <div className="absolute top-6 right-6 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300">
+      <span className="font-label text-[8px] text-primary uppercase tracking-widest">View Post</span>
+      <ArrowUpRight size={12} className="text-primary" />
+    </div>
+
+    {/* Icon */}
+    <div className="flex-shrink-0 w-16 h-16 relative">
+      <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full group-hover:bg-primary/20 transition-all duration-500" />
+      <div className="relative w-full h-full bg-surface-container-high/80 flex items-center justify-center border border-primary/20 group-hover:border-primary/50 group-hover:bg-primary group-hover:text-on-primary transition-all duration-500 text-primary">
+        <Icon size={26} />
+      </div>
+    </div>
+
+    <div className="flex-1 min-w-0">
+      <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+        <span className="font-headline text-3xl font-black text-primary tracking-tight">{stat}</span>
+        <span className="text-[9px] font-label text-on-surface-variant/50 uppercase tracking-[0.3em]">{statLabel}</span>
+      </div>
+      <h3 className="font-headline text-lg font-black mb-3 uppercase text-on-surface tracking-tight group-hover:text-primary transition-colors duration-300">{title}</h3>
+      <p className="text-on-surface-variant font-body text-sm leading-relaxed opacity-70 group-hover:opacity-90 transition-opacity mb-6">
+        {description}
+      </p>
+
+      {/* Team roster — HUD ID-badge chips */}
+      {team && (
+        <div className="mb-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2.5">
+          {team.map((member: any, i: number) => (
+            <div
+              key={i}
+              className="id-badge relative bg-surface-container-high/40 border border-primary/15 group-hover:border-primary/35 p-3 transition-colors duration-300"
+            >
+              <div className="flex items-center gap-1.5 mb-2 text-primary/50 group-hover:text-primary/80 transition-colors duration-300">
+                <Shield size={9} />
+                <span className="font-mono text-[8px] tracking-widest">OP-{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="font-headline text-[11px] font-black uppercase text-on-surface tracking-tight leading-tight mb-1">
+                {member.name}
+              </div>
+              <div className="text-[8px] font-label text-primary/70 uppercase tracking-[0.15em] leading-snug">
+                {member.role}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Clearance tag */}
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-[1px] bg-primary/40 group-hover:w-8 transition-all duration-300" />
+        <div className="text-[9px] font-label text-primary uppercase tracking-[0.3em] opacity-40 group-hover:opacity-100 transition-opacity">
+          {tag}
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom accent */}
+    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+  </motion.a>
 );
 
 const TeamMember = ({ name, role, image, badge, index = 0 }: any) => (
@@ -929,6 +1007,52 @@ export function Home() {
               description="Get mentorship and support to publish research in IEEE journals, transactions, and conference proceedings."
               clearance="Manuscript Uplink Ready"
               index="06"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Internship Opportunities Section */}
+      <section id="internships" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 hex-grid-bg opacity-30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.03)_0%,transparent_70%)]" />
+
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
+              <Rocket size={16} className="text-primary" />
+              <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
+            </div>
+            <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Internship / Fellowship Opportunities</h2>
+            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">Real internships, fellowships, and scholarships landed by our members</p>
+            <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AchievementCard
+              icon={Rocket}
+              stat="6-Month"
+              statLabel="RFuture Fellowship"
+              title="Team Shield Selected for RFuture 2026"
+              description="Team Shield was selected for RFuture, a fellowship by IEEE AP-S and IEEE MTT-S Bangalore Joint Chapter with Ansys and Synopsys, to develop Intelligent Reflecting Surfaces using Ansys HFSS and Electronics, with mentoring from global RF experts."
+              team={[
+                { name: "Soham Karak", role: "Team Leader, Simulation, Fabrication & Optimization Specialist" },
+                { name: "Supratim Mondal", role: "Testing Specialist" },
+                { name: "Shrijita Lo", role: "Team Member" },
+              ]}
+              tag="Mentored by Dr. Gobinda Sen"
+              link="https://lnkd.in/p/gRMqxpDu"
+            />
+            <AchievementCard
+              icon={GraduationCap}
+              stat="$3,000"
+              statLabel="IEEE AP-S USRS Grant"
+              title="Arjab Sengupta Wins Global Research Scholarship"
+              description="Selected as one of just 30 undergraduates worldwide across IEEE Regions 1-10 for the IEEE AP-S Undergraduate Summer Research Scholarship, funding his research in antennas, propagation, and electromagnetics."
+              tag="Mentored by Dr. Gobinda Sen"
+              link="https://lnkd.in/p/gHc_6TVG"
             />
           </div>
         </div>

@@ -32,7 +32,9 @@ import {
   Globe,
   Briefcase,
   GraduationCap,
-  Rocket
+  Rocket,
+  Factory,
+  Trophy
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { TeamSection } from "../components/TeamSection";
@@ -961,71 +963,63 @@ export function Home() {
               <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
             </div>
             <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Personnel Benefits</h2>
-            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">What you gain by joining the chapter</p>
+            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">When you join IEEE APS, you gain access to experiences that shape your future.</p>
             <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <BenefitCard 
-              icon={Terminal}
-              title="Skill Augmentation"
-              description="Access specialized workshops and seminars on electromagnetic theory and practical antenna fabrication protocols."
+              icon={Factory}
+              title="Industry Visits"
+              description="Visit top companies, labs and research centers to see innovation in action."
               clearance="Level 1 Clearance Required"
               index="01"
             />
             <BenefitCard 
-              icon={Users}
-              title="Tactical Network"
-              description="Connect with industry experts, IEEE Distinguished Lecturers, and a global network of A&P researchers."
+              icon={Briefcase}
+              title="Internship Opportunities"
+              description="Gain hands-on experience and kickstart your professional journey."
               clearance="Global Uplink Established"
               index="02"
             />
             <BenefitCard
-              icon={FlaskConical}
-              title="Innovation Labs"
-              description="Get hands-on experience with simulation tools and hardware testing environments for microwave research."
+              icon={GraduationCap}
+              title="Fellowship Programs"
+              description="Receive recognition, support and guidance to pursue research and innovative ideas."
               clearance="Experimental Protocol Active"
               index="03"
             />
             <BenefitCard
-              icon={Briefcase}
-              title="Internship Access"
-              description="Get priority access to internship openings and referrals through IEEE AP-S industry and research partnerships."
+              icon={Trophy}
+              title="Student Design Contests"
+              description="Test your skills, showcase creativity and compete on a global platform."
               clearance="Deployment Channel Open"
               index="04"
             />
             <BenefitCard
-              icon={Calendar}
-              title="Conferences"
-              description="Attend and present at IEEE AP-S flagship conferences like APSCON, MAPCON, and AP-S/URSI at member rates."
+              icon={Users}
+              title="Conferences & Workshops"
+              description="Learn from experts, present your work and stay ahead of the latest trends."
               clearance="Credentials Verified"
               index="05"
             />
             <BenefitCard
-              icon={FileText}
-              title="Paper Publication"
-              description="Get mentorship and support to publish research in IEEE journals, transactions, and conference proceedings."
+              icon={BookOpen}
+              title="Technical Knowledge"
+              description="Access journals, webinars, tutorials and cutting-edge resources."
               clearance="Manuscript Uplink Ready"
               index="06"
             />
           </div>
-        </div>
-      </section>
 
-      {/* Internship Opportunities Section */}
-      <section id="internships" className="py-32 px-8 bg-surface-dim relative overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 hex-grid-bg opacity-30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.03)_0%,transparent_70%)]" />
-
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center mb-24">
+          {/* Internship / Fellowship Opportunities */}
+          <div className="text-center mt-24 mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
               <Rocket size={16} className="text-primary" />
               <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
             </div>
-            <h2 className="font-headline text-4xl sm:text-5xl font-black uppercase mb-4 tracking-tighter px-2">Internship / Fellowship Opportunities</h2>
+            <h3 className="font-headline text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter px-2">Internship / Fellowship Opportunities</h3>
             <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.4em]">Real internships, fellowships, and scholarships landed by our members</p>
             <div className="w-24 h-[2px] gradient-line-animated mx-auto mt-6" />
           </div>

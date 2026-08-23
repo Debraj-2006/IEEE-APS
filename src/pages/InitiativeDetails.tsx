@@ -14,7 +14,29 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
     title: "Workshops",
     description: "Hands-on training sessions and practical skill development programs.",
     events: [
-      { id: 1, title: "MATLAB Workshop", date: "June 20, 2024", type: "Completed", image: "/event/matlab.jpeg" }
+      { id: 1, title: "MATLAB Workshop", date: "June 20, 2024", type: "Completed", image: "/event/matlab.jpeg" },
+      {
+        id: 12,
+        title: "Antenna Workshop",
+        date: "",
+        type: "Completed",
+        image: "/workshop/antenaa worksonp 1.png",
+        folder: [
+          { title: "Antenna Workshop", image: "/workshop/antenaa worksonp 1.png" },
+          { title: "Antenna Workshop", image: "/workshop/antenaa worksonp 2.png" }
+        ]
+      },
+      {
+        id: 13,
+        title: "Paper Writing Workshop",
+        date: "",
+        type: "Completed",
+        image: "/workshop/paper writing1.png",
+        folder: [
+          { title: "Paper Writing Workshop", image: "/workshop/paper writing1.png" },
+          { title: "Paper Writing Workshop", image: "/workshop/paper writing2.png" }
+        ]
+      }
     ]
   },
   techtalk: {
@@ -69,7 +91,8 @@ const CATEGORY_DATA: Record<string, { title: string, description: string, events
           { title: "Game Day", image: "/event/SYTRON/game-day.jpeg" },
           { title: "FF Tournament", image: "/event/SYTRON/ff-tournament.jpeg" },
           { title: "Robotics", image: "/event/SYTRON/robotics.jpeg" },
-          { title: "Robo Soccer", image: "/event/SYTRON/robo-soccer.jpeg" }
+          { title: "Robo Soccer", image: "/event/SYTRON/robo-soccer.jpeg" },
+          { title: "Robo Race", image: "/event/SYTRON/roborace.jpeg" }
         ]
       },
       {
@@ -185,10 +208,12 @@ export function InitiativeDetails() {
                 {event.title}
               </h3>
               <div className="mt-auto flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
-                  <Calendar size={12} className="shrink-0 text-primary/60" />
-                  <span className="truncate">{event.date}</span>
-                </div>
+                {event.date && (
+                  <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
+                    <Calendar size={12} className="shrink-0 text-primary/60" />
+                    <span className="truncate">{event.date}</span>
+                  </div>
+                )}
                 {event.location && (
                   <div className="flex items-center gap-2 text-on-surface-variant/70 font-label text-[10px] uppercase tracking-widest">
                     <MapPin size={12} className="shrink-0 text-primary/60" />

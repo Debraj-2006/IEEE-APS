@@ -34,7 +34,8 @@ import {
   GraduationCap,
   Rocket,
   Factory,
-  Trophy
+  Trophy,
+  ClipboardList
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { TeamSection } from "../components/TeamSection";
@@ -490,6 +491,9 @@ const SOCIAL_LINKS = {
   facebook: ""
 };
 
+// Mandatory form for all students who have taken IEEE / IEEE APS membership (new or renewed)
+const MEMBERSHIP_FORM_URL = "https://forms.gle/4xoAwydy2w6HrZzR8";
+
 export function Home() {
   const [isLoading, setIsLoading] = useState(() => {
     const hasLoaded = sessionStorage.getItem('hasLoadedBefore');
@@ -599,6 +603,24 @@ export function Home() {
                 View Dossier
               </button>
             </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+              className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-[0.15em] mt-6 max-w-xl leading-relaxed"
+            >
+              Taken or renewed your IEEE / IEEE APS membership?{" "}
+              <a
+                href={MEMBERSHIP_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-bold underline hover:text-white transition-colors"
+              >
+                Fill the mandatory membership form
+              </a>
+              .
+            </motion.p>
           </div>
 
           <motion.div
@@ -978,7 +1000,7 @@ export function Home() {
             <BenefitCard 
               icon={Briefcase}
               title="Internship Opportunities"
-              description="Gain hands-on experience and kickstart your professional journey."
+              description="Gain hands-on experience and kickstart your professional journey — including programs like the IEEE MTT-S/AP-S/EMC-S Winter Internship Program on Microwave and Antenna Technologies."
               clearance="Global Uplink Established"
               index="02"
             />
@@ -1239,6 +1261,39 @@ export function Home() {
         {/* Label tooltip */}
         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap bg-surface-dim border border-primary/30 text-primary font-label text-[9px] uppercase tracking-[0.25em] px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_12px_rgba(0,212,255,0.2)]">
           How to Join APS
+        </span>
+      </motion.a>
+
+      {/* Floating Membership Form Button */}
+      <motion.a
+        href={MEMBERSHIP_FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Mandatory Membership Form (New & Renewed Members)"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2.2, type: "spring", stiffness: 200, damping: 15 }}
+        whileHover={{ scale: 1.12, boxShadow: "0 0 32px rgba(52,168,83,0.7)" }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-28 right-8 z-[200] flex flex-col items-center gap-1 group"
+      >
+        {/* Pulse ring */}
+        <span className="absolute inset-0 rounded-none animate-ping bg-[#34A853]/20 pointer-events-none" style={{ borderRadius: 0 }} />
+
+        {/* Button body */}
+        <span className="relative flex flex-col items-center justify-center w-16 h-16 bg-surface-dim border-2 border-[#34A853]/60 group-hover:border-[#34A853] group-hover:bg-[#34A853]/10 transition-all duration-300 shadow-[0_0_24px_rgba(52,168,83,0.3)] group-hover:shadow-[0_0_36px_rgba(52,168,83,0.6)]">
+          {/* Corner accents */}
+          <span className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[#34A853]" />
+          <span className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#34A853]" />
+          <span className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-[#34A853]" />
+          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-[#34A853]" />
+
+          <ClipboardList size={26} className="text-[#34A853] group-hover:text-white transition-colors drop-shadow-[0_0_8px_rgba(52,168,83,0.8)]" />
+        </span>
+
+        {/* Label tooltip */}
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap bg-surface-dim border border-[#34A853]/30 text-[#34A853] font-label text-[9px] uppercase tracking-[0.25em] px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[0_0_12px_rgba(52,168,83,0.2)]">
+          Membership Form
         </span>
       </motion.a>
 
